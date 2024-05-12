@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/gpa_lab/.vs
+/gpa_lab/bin/Release
+/gpa_lab/obj/Release
+/tmath-lab/bin
+/tmath-lab/obj
+/TMath/packages
+/TMath/.vs
+/TMath/obj
+/TMath/bin/Debug
+*.svg
+/TMath/bin/Release
