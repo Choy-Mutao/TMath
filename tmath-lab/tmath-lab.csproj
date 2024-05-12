@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>tmath_lab</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="math\TPointCollection_Lab.cs~RF1f842d.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Clipper2" Version="1.3.0" />
+    <PackageReference Include="MSTest" Version="2.2.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Utils\ClipFileIO\Clipper.FileIO.csproj" />
+    <None Include="Utils\Colors\Clipper.Colors.csproj" />
+    <None Include="Utils\SVG\Clipper2.SVG.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TMath\tmath.csproj" />
+  </ItemGroup>
+
+</Project>

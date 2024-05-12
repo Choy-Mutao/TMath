@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E62F42E-7693-4470-B005-090E3E5C3282}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>tmath</RootNamespace>
+    <AssemblyName>tmath</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Clipper2Lib, Version=1.3.0.0, Culture=neutral, PublicKeyToken=ddeb3f68c442d6e4, processorArchitecture=MSIL">
+      <HintPath>packages\Clipper2.1.3.0\lib\netstandard2.0\Clipper2Lib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="algorithms\sweepline\EventQueue.cs" />
+    <Compile Include="algorithms\sweepline\SL_Seg.cs" />
+    <Compile Include="algorithms\sweepline\SweepEvent.cs" />
+    <Compile Include="algorithms\sweepline\SweepLine.cs" />
+    <Compile Include="ClipperUtil.cs" />
+    <Compile Include="earcut\Earcut.cs" />
+    <Compile Include="geometryutils\Geometry2dUtils.cs" />
+    <Compile Include="geometryutils\nfputils.cs" />
+    <Compile Include="geometryutils\topologyutil.cs" />
+    <Compile Include="geo_math\body\box.cs" />
+    <Compile Include="geo_math\bounding\Ball.cs" />
+    <Compile Include="geo_math\curve\arc.cs" />
+    <Compile Include="geo_math\curve\Circle.cs" />
+    <Compile Include="geo_math\curve\ellipse.cs" />
+    <Compile Include="geo_math\define.cs" />
+    <Compile Include="geo_math\GeometryException.cs" />
+    <Compile Include="geo_math\GeometryOperator.cs" />
+    <Compile Include="geo_math\curve\curve.cs" />
+    <Compile Include="geo_math\curve\line.cs" />
+    <Compile Include="geo_math\face\plane.cs" />
+    <Compile Include="geo_math\body\sphere.cs" />
+    <Compile Include="gs\spacial_structure\Octree.cs" />
+    <Compile Include="gs\trees\avl\AVL.cs" />
+    <Compile Include="gs\trees\rtree\Node.cs" />
+    <Compile Include="gs\trees\rtree\Point.cs" />
+    <Compile Include="gs\trees\rtree\Rectangle.cs" />
+    <Compile Include="gs\trees\rtree\RTree.cs" />
+    <Compile Include="math\MathEnum.cs" />
+    <Compile Include="math\TEuler.cs" />
+    <Compile Include="math\interfaces\IPoint.cs" />
+    <Compile Include="math\interfaces\IVector.cs" />
+    <Compile Include="math\TQuaternion.cs" />
+    <Compile Include="math\TConstant.cs" />
+    <Compile Include="math\Tolerance.cs" />
+    <Compile Include="math\TPoint2D.cs" />
+    <Compile Include="math\TPoint3D.cs" />
+    <Compile Include="math\TPointCollection.cs" />
+    <Compile Include="geo_math\face\polygon.cs" />
+    <Compile Include="geo_math\curve\polyline.cs" />
+    <Compile Include="geo_math\curve\ray.cs" />
+    <Compile Include="geo_math\face\region.cs" />
+    <Compile Include="geo_math\curve\segment.cs" />
+    <Compile Include="geo_math\face\triangle.cs" />
+    <Compile Include="math\TMatrix3.cs" />
+    <Compile Include="math\TVector2D.cs" />
+    <Compile Include="math\TVector3D.cs" />
+    <Compile Include="NumberUtils.cs" />
+    <Compile Include="pga\Area.cs" />
+    <Compile Include="pga\BoundingContainers.cs" />
+    <Compile Include="pga\ConvexHullApproximation.cs" />
+    <Compile Include="pga\ConvexHullPointSet.cs" />
+    <Compile Include="pga\ConvexHullSimplePolyline.cs" />
+    <Compile Include="pga\ConvexPolygonExtremePoints.cs" />
+    <Compile Include="pga\LineConvexPolytopeIntersection.cs" />
+    <Compile Include="pga\LineLineDistance.cs" />
+    <Compile Include="pga\LinePlaneIntersection.cs" />
+    <Compile Include="pga\Lines.cs" />
+    <Compile Include="pga\Planes.cs" />
+    <Compile Include="pga\PointInPolygon.cs" />
+    <Compile Include="pga\PolygonTangents.cs" />
+    <Compile Include="pga\PolylineDecimation.cs" />
+    <Compile Include="pga\RayTriangleIntersection.cs" />
+    <Compile Include="pga\SegmentSetIntersections.cs" />
+    <Compile Include="pga\ShamosHoeyAVLCode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="math\TMatrix4.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="gs\graphs\" />
+    <Folder Include="gs\line_structue\" />
+    <Folder Include="gs\plane_structure\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

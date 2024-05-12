@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "tmath-lab": {
+      "commandName": "Project",
+      "hotReloadEnabled": false
+    }
+  }
+}
