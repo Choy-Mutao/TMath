@@ -122,7 +122,9 @@ namespace tmath.geometry
                         //    return INTER_NUM.ZERO;                    // they are NOT collinear
                         //}
 
-                if (u.GetNormal().Dot(w.GetNormal()) == v.GetNormal().Dot(w.GetNormal()))
+                if (Math.Abs(u.GetNormal().Dot(w.GetNormal())) == Math.Abs(v.GetNormal().Dot(w.GetNormal()))
+                    && Math.Abs(TVector2D.Cross(w, v) / v.Length()) > tolerance.EqualPoint
+                    && Math.Abs(TVector2D.Cross(w, u) / u.Length()) > tolerance.EqualPoint)
                 {
                     return INTER_NUM.ZERO;
                 }

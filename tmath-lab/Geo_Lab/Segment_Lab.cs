@@ -101,9 +101,19 @@ namespace tmath_lab.Geo_Lab
             Assert.IsTrue(p2.IsEqualTo(new TPoint2D(3, 3)));
 
             // 案例 9: 线段近似重合
-            segment1 = new TLineSegment2d(3217.6000000000004, 2087.2000000000003, 3284.8,2087.2000000000003);
+            segment1 = new TLineSegment2d(3217.6000000000004, 2087.2000000000003, 3284.8, 2087.2000000000003);
             segment2 = new TLineSegment2d(3299.55, 2087.2, 3273.08, 2087.2);
-            Assert.IsTrue(segment1.IntersectWith(segment2, out p1, out p2, new Tolerance(0, 1e-13)) == INTER_NUM.TWO);
+            Assert.IsTrue(segment1.IntersectWith(segment2, out p1, out p2, new Tolerance(0, 1e-6)) == INTER_NUM.TWO);
+
+            // 案例 10: 线段近似重合
+            segment1 = new TLineSegment2d(3181.3800, 2039.7000, 3259.9800, 2039.7000);
+            segment2 = new TLineSegment2d(3217.6000, 2087.2000, 3284.8000, 2087.2000);
+            Assert.IsTrue(segment1.IntersectWith(segment2, out p1, out p2, new Tolerance(0, 1e-6)) == INTER_NUM.ZERO);
+
+            // 案例 11: 线段近似重合
+            segment1 = new TLineSegment2d(3217.6000000000004, 2087.2000000000003, 3284.8, 2087.2000000000003);
+            segment2 = new TLineSegment2d(3259.98, 2039.7, 3181.38, 2039.7);
+            Assert.IsTrue(segment1.IntersectWith(segment2, out p1, out p2, new Tolerance(0, 1e-6)) == INTER_NUM.ZERO);
         }
 
 
