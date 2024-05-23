@@ -103,7 +103,7 @@ namespace tmath.ComputeGeometry.GeometryUtils
             List<KeyValuePair<TPoint2D, TPoint2D>> copy_pnts = new List<KeyValuePair<TPoint2D, TPoint2D>>();
             for (int i = 0; i < pnt_pair_size; i++)
             {
-                if (CommonUtil.isEqualPoint(point_pairs[i].Key, point_pairs[i].Value)) continue; // 去重
+                if (CommonUtil.IsEqualPoint(point_pairs[i].Key, point_pairs[i].Value)) continue; // 去重
                 TPoint2D pnt1 = new TPoint2D(point_pairs[i].Key.X, point_pairs[i].Key.Y);
                 TPoint2D pnt2 = new TPoint2D(point_pairs[i].Value.X, point_pairs[i].Value.Y);
                 copy_pnts.Add(new KeyValuePair<TPoint2D, TPoint2D>(pnt1, pnt2));
@@ -283,7 +283,7 @@ namespace tmath.ComputeGeometry.GeometryUtils
             List<KeyValuePair<TPoint2D, TPoint2D>> copy_pnts = new List<KeyValuePair<TPoint2D, TPoint2D>>();
             for (int i = 0; i < pnt_pair_size; i++)
             {
-                if (CommonUtil.isEqualPoint(point_pairs[i].Key, point_pairs[i].Value)) continue;
+                if (CommonUtil.IsEqualPoint(point_pairs[i].Key, point_pairs[i].Value)) continue;
                 TPoint2D pnt1 = new TPoint2D(point_pairs[i].Key.X, point_pairs[i].Key.Y);
                 TPoint2D pnt2 = new TPoint2D(point_pairs[i].Value.X, point_pairs[i].Value.Y);
                 copy_pnts.Add(new KeyValuePair<TPoint2D, TPoint2D>(pnt1, pnt2));

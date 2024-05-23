@@ -56,7 +56,7 @@ namespace tmath.GeometryUtil
         //		Input: two points: p1 and p2;
         //		Outout: true is equal;
         //				false is not;
-        public static bool isEqualPoint(TPoint2D p1, TPoint2D p2, double tol = EPSILON)
+        public static bool IsEqualPoint(TPoint2D p1, TPoint2D p2, double tol = EPSILON)
         {
             TVector2D p = (p1 - p2).ToVector();
             return NumberUtil.CompValue(norm(p), 0, tol) == 0;
@@ -366,7 +366,7 @@ namespace tmath.GeometryUtil
         }
         public static bool isPointOnPolygon(TPoint2D A, TPoint2DCollection B)
         {
-            if (!isEqualPoint(B.First(), B.Last()))
+            if (!IsEqualPoint(B.First(), B.Last()))
                 B.Add(B.First());
             int n = B.Count;
             for (int i = 1; i < n; i++)
@@ -384,7 +384,7 @@ namespace tmath.GeometryUtil
         public static bool IsPointInPolygon(TPoint2D P, TPoint2DCollection points)
         {
             TPoint2DCollection points_copy = new TPoint2DCollection(points);
-            if (!isEqualPoint(points_copy.First(), points_copy.Last()))
+            if (!IsEqualPoint(points_copy.First(), points_copy.Last()))
                 points_copy.Add(points_copy.First());
 
             List<TLineSegment2d> contour = new List<TLineSegment2d>();
@@ -483,7 +483,7 @@ namespace tmath.GeometryUtil
             TPoint2DCollection poly_pnts = new TPoint2DCollection();
             _poly_pnts.ForEach(pnt => poly_pnts.Add(new TPoint2D(pnt)));
             double area = 0.0;
-            if (!isEqualPoint(poly_pnts.First(), poly_pnts.Last()))
+            if (!IsEqualPoint(poly_pnts.First(), poly_pnts.Last()))
                 poly_pnts.Add(new TPoint2D(poly_pnts.First()));
 
             int n = poly_pnts.Count - 1;
@@ -500,7 +500,7 @@ namespace tmath.GeometryUtil
         {
             decimal area = new decimal(0.00000);
             if (poly_pnts.Count < 3) return area;
-            if (!isEqualPoint(poly_pnts.First(), poly_pnts.Last()))
+            if (!IsEqualPoint(poly_pnts.First(), poly_pnts.Last()))
                 poly_pnts.Add(poly_pnts.First());
 
             int n = poly_pnts.Count - 1;

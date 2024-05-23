@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace tmath
 {
@@ -21,52 +20,6 @@ namespace tmath
                 return 1; // a > b
             else
                 return 0; // a = b
-        }
-
-        /// <summary>
-        /// 判断字符串是否是纯数字
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        public static bool IsNumbericStr(string str)
-        {
-            str.TrimStart();
-            str.TrimEnd();
-            if (str.First() == '-' || str.First() == '+')
-                str = str.Remove(0, 1);
-
-            bool bIsNum = double.TryParse(str, out _);
-            int iPoint = 0;
-            for (int i = 0; i < str.Length; i++)
-            {
-                char ch = (char)str[i];
-                if (ch >= '0' && ch <= '9')
-                {
-                    continue;
-                }
-                else if (ch == '.')
-                {
-                    if (i == 0)
-                    {
-                        iPoint = 1;
-                    }
-                    else if (iPoint == 2)
-                    {
-                        bIsNum = false;
-                        return bIsNum;
-                    }
-                    else
-                    {
-                        iPoint = 2;
-                    }
-                }
-                else
-                {
-                    bIsNum = false;
-                    return bIsNum;
-                }
-            }
-            return bIsNum;
         }
         /// <summary>
         /// 弧度转角度
