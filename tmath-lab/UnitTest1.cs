@@ -133,8 +133,75 @@ namespace tmath_lab
             string filename = @"..\..\inflate.svg";
             SvgUtils.SaveToFile(svgwriter, filename, FillRule.NonZero, 800, 600, 10);
             ClipperFileIO.OpenFileWithDefaultApp(filename);
+        }
+
+        [TestMethod("Cycle Interget Test")]
+        public void Test_Cycle_Interget_Test()
+        {
+            int[] genes = new int[] { 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+            int[] genes2 = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+
+            int[] chromosome3 = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            int[] chromosome4 = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+            List<List<int>> list = new List<List<int>>();
+
+            for (int i = 0; i < genes.Length; i++)
+            {
+                if (!list.SelectMany((List<int> p) => p).Contains(i))
+                {
+                    List<int> list2 = new List<int>();
+                    CreateCycle(genes, genes2, i, list2);
+                    list.Add(list2);
+                }
+            }
 
 
+            for (int j = 0; j < list.Count; j++)
+            {
+                List<int> cycle = list[j];
+                if (j % 2 == 0)
+                {
+                    CopyCycleIndexPair(cycle, genes, chromosome3, genes2, chromosome4);
+                }
+                else
+                {
+                    CopyCycleIndexPair(cycle, genes, chromosome4, genes2, chromosome3);
+                }
+            }
+
+            Console.Write("Test Finished");
+        }
+
+        private static void CopyCycleIndexPair(IList<int> cycle, int[] fromParent1Genes, int[] toOffspring1, int[] fromParent2Genes, int[] toOffspring2)
+        {
+            int num = 0;
+            for (int i = 0; i < cycle.Count; i++)
+            {
+                num = cycle[i];
+                //toOffspring1.ReplaceGene(num, fromParent1Genes[num]);
+                //toOffspring2.ReplaceGene(num, fromParent2Genes[num]);
+                toOffspring1[num] = fromParent1Genes[num];
+                toOffspring2[num] = fromParent2Genes[num];
+            }
+        }
+
+        private void CreateCycle(int[] parent1Genes, int[] parent2Genes, int geneIndex, List<int> cycle)
+        {
+            if (!cycle.Contains(geneIndex))
+            {
+                int parent2Gene = parent2Genes[geneIndex];
+                cycle.Add(geneIndex);
+                var anon = parent1Genes.Select((int g, int i) => new
+                {
+                    Value = g,
+                    Index = i
+                }).First(g => g.Value == parent2Gene);
+                if (geneIndex != anon.Index)
+                {
+                    CreateCycle(parent1Genes, parent2Genes, anon.Index, cycle);
+                }
+            }
         }
     }
 }

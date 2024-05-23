@@ -84,7 +84,6 @@ namespace tmath.geometry
         /// 计算点 P 的投影是否在当前线段的区间上， 点在线段上的跨立实验
         /// </summary>
         /// <returns></returns>
-        /// 
         private int InSegment(TPoint2D P)
         {
             if (SP.X != EP.X)
@@ -104,7 +103,9 @@ namespace tmath.geometry
             return 0;
         }
 
-        public INTER_NUM IntersectWith(TLineSegment2d segment, out TPoint2D I0, out TPoint2D I1)
+        public INTER_NUM IntersectWith(TLineSegment2d segment, out TPoint2D I0, out TPoint2D I1) => IntersectWith(segment, out I0, out I1, Tolerance.Global);
+
+        public INTER_NUM IntersectWith(TLineSegment2d segment, out TPoint2D I0, out TPoint2D I1, Tolerance tolerance)
         {
 
             I0 = default; I1 = default;
@@ -114,11 +115,16 @@ namespace tmath.geometry
             TVector2D w = (this.SP - segment.SP).ToVector();
             double D = TVector2D.Cross(u, v);
             // test if  they are parallel (includes either being a point)
-            if (Math.Abs(D) < SMALL_NUM)
+            if (Math.Abs(D) <= tolerance.EqualVector)
             {           // this and segment are parallel
-                if (TVector2D.Cross(u, w) != 0 || TVector2D.Cross(v, w) != 0)
+                        //if (TVector2D.Cross(u, w) != 0 || TVector2D.Cross(v, w) != 0)
+                        //{
+                        //    return INTER_NUM.ZERO;                    // they are NOT collinear
+                        //}
+
+                if (u.GetNormal().Dot(w.GetNormal()) == v.GetNormal().Dot(w.GetNormal()))
                 {
-                    return INTER_NUM.ZERO;                    // they are NOT collinear
+                    return INTER_NUM.ZERO;
                 }
                 // they are collinear or degenerate
                 // check if they are degenerate  points
@@ -158,7 +164,7 @@ namespace tmath.geometry
                     t0 = w.Y / v.Y;
                     t1 = w2.Y / v.Y;
                 }
-                if (t0 > t1)
+                if (t0 > t1 + tolerance.EqualPoint)
                 {                   // must have t0 smaller than t1
                     double t = t0; t0 = t1; t1 = t;    // swap if not
                 }
@@ -168,7 +174,8 @@ namespace tmath.geometry
                 }
                 t0 = t0 < 0 ? 0 : t0;               // clip to min 0
                 t1 = t1 > 1 ? 1 : t1;               // clip to max 1
-                if (t0 == t1)
+                //if (t0 == t1)
+                if (Math.Abs(t0 - t1) < tolerance.EqualPoint)
                 {                  // intersect is a point
                     I0 = segment.SP + t0 * v;
                     return INTER_NUM.ONE;
@@ -183,12 +190,12 @@ namespace tmath.geometry
             // the segments are skew and may intersect in a point
             // get the intersect parameter for S1
             double sI = TVector2D.Cross(v, w) / D;
-            if (sI < 0 || sI > 1)                // no intersect with S1
-                return 0;
+            if (sI < -tolerance.EqualPoint || sI > 1 + tolerance.EqualPoint)                // no intersect with S1
+                return INTER_NUM.ZERO;
             // get the intersect parameter for segment
             double tI = TVector2D.Cross(u, w) / D;
-            if (tI < 0 || tI > 1)                // no intersect with segment
-                return 0;
+            if (tI < -tolerance.EqualPoint || tI > 1 + tolerance.EqualPoint)                // no intersect with segment
+                return INTER_NUM.ZERO;
             I0 = this.SP + sI * u;                // compute S1 intersect point
             return INTER_NUM.ONE;
 

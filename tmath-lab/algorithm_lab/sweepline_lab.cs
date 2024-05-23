@@ -1,4 +1,5 @@
-﻿using Clipper2Lib;
+﻿#if DEBUG
+using Clipper2Lib;
 using tmath;
 using tmath.algorithms.sweepline;
 using tmath.geometry;
@@ -133,3 +134,4 @@ namespace tmath_lab.algorithm_lab
         }
     }
 }
+#endif
