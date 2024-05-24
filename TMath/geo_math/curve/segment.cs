@@ -115,14 +115,10 @@ namespace tmath.geometry
             TVector2D w = (this.SP - segment.SP).ToVector();
             double D = TVector2D.Cross(u, v);
             // test if  they are parallel (includes either being a point)
-            if (Math.Abs(D) <= tolerance.EqualVector)
-            {           // this and segment are parallel
-                        //if (TVector2D.Cross(u, w) != 0 || TVector2D.Cross(v, w) != 0)
-                        //{
-                        //    return INTER_NUM.ZERO;                    // they are NOT collinear
-                        //}
-
-                if (Math.Abs(u.GetNormal().Dot(w.GetNormal())) == Math.Abs(v.GetNormal().Dot(w.GetNormal()))
+            if (Math.Abs(TVector2D.Cross(u.GetNormal(), v.GetNormal())) <= tolerance.EqualVector)
+            {
+                // this and segment are parallel
+                if (Math.Abs(Math.Abs(u.GetNormal().Dot(w.GetNormal())) - Math.Abs(v.GetNormal().Dot(w.GetNormal()))) <= tolerance.EqualVector
                     && Math.Abs(TVector2D.Cross(w, v) / v.Length()) > tolerance.EqualPoint
                     && Math.Abs(TVector2D.Cross(w, u) / u.Length()) > tolerance.EqualPoint)
                 {

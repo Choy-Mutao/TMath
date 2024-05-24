@@ -2,6 +2,7 @@
 
 namespace tmath
 {
+    [Serializable]
     public struct TVector2D : IVector<TVector2D>
     {
         #region

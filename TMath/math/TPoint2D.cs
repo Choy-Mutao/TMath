@@ -2,6 +2,7 @@
 
 namespace tmath
 {
+    [Serializable]
     public struct TPoint2D : IPoint<TPoint2D, TVector2D>
     {
         #region  Fields

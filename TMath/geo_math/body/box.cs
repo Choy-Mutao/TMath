@@ -3,21 +3,20 @@ using System.Linq;
 
 namespace tmath.geometry
 {
+    [Serializable]
     public abstract class TBox<T>
     {
-        private T _Min;
-        private T _Max;
-
-        public T Min { get => _Min; set => _Min = value; }
-        public T Max { get => _Max; set => _Max = value; }
+        public T Min;
+        public T Max;
 
         public TBox() { }
-        public TBox(T Min, T Max) { _Min = Min; _Max = Max; }
+        public TBox(T _min, T _max) { Min = _min; Max = _max; }
 
-        public TBox<T> Copy(TBox<T> _src) { _Min = _src.Min; _Max = _src.Max; return this; }
+        public TBox<T> Copy(TBox<T> _src) { Min = _src.Min; Max = _src.Max; return this; }
         public abstract TBox<T> Clone();
     }
 
+    [Serializable]
     public class TBox2D : TBox<TPoint2D>
     {
         #region Constructor
@@ -36,6 +35,7 @@ namespace tmath.geometry
         public override TBox<TPoint2D> Clone() => new TBox2D().Copy(this);
     }
 
+    [Serializable]
     public class TBox3D : TBox<TPoint3D>
     {
         public TBox3D()

@@ -114,6 +114,11 @@ namespace tmath_lab.Geo_Lab
             segment1 = new TLineSegment2d(3217.6000000000004, 2087.2000000000003, 3284.8, 2087.2000000000003);
             segment2 = new TLineSegment2d(3259.98, 2039.7, 3181.38, 2039.7);
             Assert.IsTrue(segment1.IntersectWith(segment2, out p1, out p2, new Tolerance(0, 1e-6)) == INTER_NUM.ZERO);
+
+            // 案例 12: 线段近似重合
+            segment1 = new TLineSegment2d(3214.2000000000003, 2238, 3214.6000000000004, 2087.2000000000003);
+            segment2 = new TLineSegment2d(3214.33, 2180.4, 3214.33, 2181.3);
+            Assert.IsTrue(segment1.IntersectWith(segment2, out p1, out p2, new Tolerance(0, 1e-6)) == INTER_NUM.ZERO);
         }
 
 

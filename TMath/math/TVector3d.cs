@@ -2,6 +2,7 @@
 
 namespace tmath
 {
+    [Serializable]
     public struct TVector3D : IVector<TVector3D>
     {
         #region Fields
