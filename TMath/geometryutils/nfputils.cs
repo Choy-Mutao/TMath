@@ -26,6 +26,7 @@ namespace tmath.geometryutils
             id = -1;
             rotation = 0;
         }
+
         public NFPPoint(NFPPoint src)
         {
             X = src.X; Y = src.Y;
@@ -198,7 +199,7 @@ namespace tmath.geometryutils
     /// </summary>
     public static class NFPUtil
     {
-        const double TOL = 1e-5;
+        const double TOL = 1e-4;
         struct TouchType
         {
             public int type { get; set; }
@@ -1473,7 +1474,7 @@ namespace tmath.geometryutils
 
                         double d = PolygonSlideDistance(A, B, vectors[i], true); //NOTE: test
                         double vecd2 = vectors[i].X * vectors[i].X + vectors[i].Y * vectors[i].Y;
-                        
+
                         if (double.IsNaN(d) || d * d > vecd2)
                             d = vectors[i].Length();
 
