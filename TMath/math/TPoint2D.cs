@@ -50,11 +50,22 @@ namespace tmath
 
         public static TPoint2D operator -(TPoint2D p1, TPoint2D p2) => new TPoint2D(p1.X - p2.X, p1.Y - p2.Y);
 
+        public static TPoint2D operator -(TPoint2D p, TVector2D vec2d) => new TPoint2D(p.X - vec2d.X, p.Y - vec2d.Y);
+
         public static TPoint2D operator +(TPoint2D p, TVector2D vec2d) => new TPoint2D(p.X + vec2d.X, p.Y + vec2d.Y);
 
         public static TPoint2D operator +(TPoint2D p1, TPoint2D p2) => new TPoint2D(p1.X + p2.X, p1.Y + p2.Y);
 
-        public static TPoint2D operator /(TPoint2D p, double n) => new TPoint2D(p.X / n, p.Y / n);
+        public static TPoint2D operator /(TPoint2D p, double n)
+        {
+            if (n == 0) throw new DivideByZeroException("TVector2D can not be divided by zero!");
+            return new TPoint2D(p.X / n, p.Y / n);
+        }
+
+        public static TPoint2D operator *(TPoint2D p, double n) => new TPoint2D(p.X * n, p.Y * n);
+
+
+
         #endregion
 
         #region Static Methods

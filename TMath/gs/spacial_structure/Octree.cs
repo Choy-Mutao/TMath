@@ -11,10 +11,11 @@ namespace tmath.gs.spacial_structure
         public TBox3D bounds;
         public List<Octree> subTrees;
         public Stack<TTriangle> triangles;
+        private int max_level;
         #endregion
 
         #region  Constructor
-        public Octree(TBox3D _box)
+        public Octree(TBox3D _box, int _max_level = 8)
         {
             box = _box;
             bounds = new TBox3D();
@@ -22,6 +23,7 @@ namespace tmath.gs.spacial_structure
             // initial
             subTrees = new List<Octree>();
             triangles = new Stack<TTriangle>();
+            max_level = _max_level;
         }
         ~Octree() { }
         #endregion
@@ -117,7 +119,7 @@ namespace tmath.gs.spacial_structure
             for (int i = 0; i < _sub_Trees.Count; i++)
             {
                 int len = _sub_Trees[i].triangles.Count;
-                if (len > 8 && level < 16)
+                if (len > 8 && level < max_level)
                 {
                     _sub_Trees[i].Split(level + 1);
                 }
@@ -129,11 +131,11 @@ namespace tmath.gs.spacial_structure
             return this;
         }
 
-        public Octree Build()
+        public Octree Build(int _max_level = 0)
         {
+            max_level = _max_level;
             CalcBox();
             Split(0);
-
             return this;
         }
 
