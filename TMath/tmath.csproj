@@ -45,7 +45,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="algorithms\pso\IParticle.cs" />
+    <Compile Include="algorithms\pso\ISwarm.cs" />
     <Compile Include="algorithms\pso\Particle.cs" />
+    <Compile Include="algorithms\pso\ParticleSwarmAlgorithm.cs" />
     <Compile Include="algorithms\sweepline\EventQueue.cs" />
     <Compile Include="algorithms\sweepline\SL_Seg.cs" />
     <Compile Include="algorithms\sweepline\SweepEvent.cs" />

@@ -1,18 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace tmath.algorithms.pso
+﻿namespace tmath.algorithms.pso
 {
-    /// <summary>
-    /// A particle is made of 
-    /// 1. a position inside at this position
-    /// 2. the fitness value at this position
-    /// 3. a velocity(in fact a displacement), which will be used to compute the next position
-    /// 4. a memory, that contains the best position(called the previous best) found so far by the particle
-    /// 5. the fitness value of this previous best
-    /// 
-    /// NOTE: in this project, all geometry params use 2D message;
-    /// </summary>
-    public class Particle
+
+    public class Particle : IParticle
     {
         private TPoint2D Position; // a position inside at this position;
         private TVector2D Velocity; // a velocity which will be used to compute the next position;
@@ -22,11 +11,6 @@ namespace tmath.algorithms.pso
 
         private float Fitness; // the fitness value at this position
         private float Previous_Fitness; // the fitness value of this previous best
-
-        public List<Particle> GetNeighbours(double radius)
-        {
-        }
-
 
         /// <summary>
         /// The velocity update equations
@@ -45,18 +29,26 @@ namespace tmath.algorithms.pso
 
         }
 
-        public double Evaluate()
+        public void Inform()
         {
 
         }
+
     }
 
-    /// <summary>
-    /// The set of particles
-    /// </summary>
-    public interface ISwarm
+
+    public class LinearSwarm
     {
-        List<Particle> GetNeighbours(in Particle particle, double radius);
-        void Initialization();
+
+    }
+
+    public class RingSwarm
+    {
+
+    }
+
+    public class InformStrategy
+    {
+
     }
 }
