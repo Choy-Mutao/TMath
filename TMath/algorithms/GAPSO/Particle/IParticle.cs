@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace tmath.algorithms.pso
+﻿namespace tmath.algorithms.pso
 {
     /// <summary>
     /// A particle is made of 
@@ -18,7 +12,7 @@ namespace tmath.algorithms.pso
     /// </summary>
     public interface IParticle
     {
-
+        void Initialization();
     }
 
 }

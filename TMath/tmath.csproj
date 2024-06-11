@@ -45,12 +45,16 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="algorithms\GAPSO\Fitness\IFitness.cs" />
+    <Compile Include="algorithms\GAPSO\InformTopology\IInformStrategy.cs" />
+    <Compile Include="algorithms\GAPSO\InformTopology\InformTopology.cs" />
     <Compile Include="algorithms\GAPSO\Particle\IParticle.cs" />
-    <Compile Include="algorithms\GAPSO\Swarm\IPSO.cs" />
     <Compile Include="algorithms\GAPSO\Swarm\ISwarm.cs" />
     <Compile Include="algorithms\GAPSO\Particle\BaseParticle.cs" />
     <Compile Include="algorithms\GAPSO\ParticleSwarmAlgorithm.cs" />
+    <Compile Include="algorithms\GAPSO\Swarm\Swarm.cs" />
     <Compile Include="algorithms\GAPSO\Termination\ITermination.cs" />
+    <Compile Include="algorithms\GAPSO\Gearbox\IGearbox.cs" />
     <Compile Include="algorithms\sweepline\EventQueue.cs" />
     <Compile Include="algorithms\sweepline\SL_Seg.cs" />
     <Compile Include="algorithms\sweepline\SweepEvent.cs" />
@@ -122,7 +126,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="algorithms\GAPSO\InformStrategy\" />
     <Folder Include="algorithms\GAPSO\Randomization\" />
     <Folder Include="gs\graphs\" />
     <Folder Include="gs\line_structue\" />
