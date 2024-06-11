@@ -1,16 +1,25 @@
 ﻿namespace tmath.algorithms.pso
 {
-
-    public class Particle : IParticle
+    partial struct Velocity
     {
-        private TPoint2D Position; // a position inside at this position;
-        private TVector2D Velocity; // a velocity which will be used to compute the next position;
+        int size; // Dimension
+        double[] v;
+    }
 
-        private object Data;
-        private object Memory; // contains the best position (called the previous best) found so far by the particle;
+    partial struct Position
+    {
+        int size;   // Dimension
+        double[] x;
+        //double f;
+    }
 
-        private float Fitness; // the fitness value at this position
-        private float Previous_Fitness; // the fitness value of this previous best
+    public class BaseParticle : IParticle
+    {
+        Velocity velocity;
+        Position position;
+
+        private double Fitness; // the fitness value at this position
+        private double Previous_Fitness; // the fitness value of this previous best
 
         /// <summary>
         /// The velocity update equations

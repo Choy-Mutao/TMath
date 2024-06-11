@@ -48,7 +48,7 @@
     <Compile Include="algorithms\GAPSO\Particle\IParticle.cs" />
     <Compile Include="algorithms\GAPSO\Swarm\IPSO.cs" />
     <Compile Include="algorithms\GAPSO\Swarm\ISwarm.cs" />
-    <Compile Include="algorithms\GAPSO\Particle\Particle.cs" />
+    <Compile Include="algorithms\GAPSO\Particle\BaseParticle.cs" />
     <Compile Include="algorithms\GAPSO\ParticleSwarmAlgorithm.cs" />
     <Compile Include="algorithms\GAPSO\Termination\ITermination.cs" />
     <Compile Include="algorithms\sweepline\EventQueue.cs" />
