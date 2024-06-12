@@ -1,6 +1,4 @@
-﻿using tmath.algorithms.pso;
-
-namespace tmath.algorithms.GAPSO.Fitness
+﻿namespace tmath.algorithms.pso
 {
     public interface IFitness
     {

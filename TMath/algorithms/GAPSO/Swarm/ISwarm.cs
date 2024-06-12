@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace tmath.algorithms.pso
+﻿namespace tmath.algorithms.pso
 {
     /// <summary>
-    /// The set of particles
+    /// The set of m_particles
     /// </summary>
     public interface ISwarm
     {
+        double Best_Fitness { get; }
         void Initialization();
-        void Evaluate();
         void Move();
+        IParticle[] CurrentParticles();
     }
 }

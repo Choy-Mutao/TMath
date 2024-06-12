@@ -45,12 +45,15 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="algorithms\GAPSO\ExceptionHelper.cs" />
     <Compile Include="algorithms\GAPSO\Fitness\IFitness.cs" />
-    <Compile Include="algorithms\GAPSO\InformTopology\IInformStrategy.cs" />
-    <Compile Include="algorithms\GAPSO\InformTopology\InformTopology.cs" />
+    <Compile Include="algorithms\GAPSO\Gearbox\SPSO2006Gearbox.cs" />
+    <Compile Include="algorithms\GAPSO\InformTopology\IInformTopology.cs" />
+    <Compile Include="algorithms\GAPSO\InformTopology\LinksInformTopology.cs" />
     <Compile Include="algorithms\GAPSO\Randomization\BaseRandomization.cs" />
     <Compile Include="algorithms\GAPSO\Randomization\IRandomization.cs" />
     <Compile Include="algorithms\GAPSO\Randomization\KISSRandomization.cs" />
+    <Compile Include="algorithms\GAPSO\StringExtensions.cs" />
     <Compile Include="algorithms\GAPSO\Swarm\ISwarm.cs" />
     <Compile Include="algorithms\GAPSO\Particle\IParticle.cs" />
     <Compile Include="algorithms\GAPSO\ParticleSwarmAlgorithm.cs" />

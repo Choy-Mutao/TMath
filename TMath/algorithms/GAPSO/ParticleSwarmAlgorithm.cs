@@ -1,5 +1,4 @@
 ﻿using System;
-using tmath.algorithms.GAPSO.Fitness;
 using tmath.algorithms.pso.Termination;
 
 namespace tmath.algorithms.pso
@@ -26,15 +25,26 @@ namespace tmath.algorithms.pso
 
         public void Start()
         {
-            // Initialization
+
+            ExceptionHelper.ThrowIfNull("swarm", Swarm);
+            ExceptionHelper.ThrowIfNull("fitness", Fitness);
+            ExceptionHelper.ThrowIfNull("randomization", randomization);
+            ExceptionHelper.ThrowIfNull("termination", Termination);
+
+            // Build
             Swarm.Initialization();
 
             // Evaluation
             do
             {
-                Swarm.Evaluate();
+                Evaluate();
                 Termination.Update();
             } while (Termination.HasReached(Swarm));
+        }
+
+        void Evaluate()
+        {
+            Swarm.CurrentParticles();
         }
 
         public void Stop()
