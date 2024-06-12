@@ -48,11 +48,15 @@
     <Compile Include="algorithms\GAPSO\Fitness\IFitness.cs" />
     <Compile Include="algorithms\GAPSO\InformTopology\IInformStrategy.cs" />
     <Compile Include="algorithms\GAPSO\InformTopology\InformTopology.cs" />
-    <Compile Include="algorithms\GAPSO\Particle\IParticle.cs" />
+    <Compile Include="algorithms\GAPSO\Randomization\BaseRandomization.cs" />
+    <Compile Include="algorithms\GAPSO\Randomization\IRandomization.cs" />
+    <Compile Include="algorithms\GAPSO\Randomization\KISSRandomization.cs" />
     <Compile Include="algorithms\GAPSO\Swarm\ISwarm.cs" />
-    <Compile Include="algorithms\GAPSO\Particle\BaseParticle.cs" />
+    <Compile Include="algorithms\GAPSO\Particle\IParticle.cs" />
     <Compile Include="algorithms\GAPSO\ParticleSwarmAlgorithm.cs" />
     <Compile Include="algorithms\GAPSO\Swarm\Swarm.cs" />
+    <Compile Include="algorithms\GAPSO\Termination\ExecuteLimtTermination.cs" />
+    <Compile Include="algorithms\GAPSO\Termination\FailureTermination.cs" />
     <Compile Include="algorithms\GAPSO\Termination\ITermination.cs" />
     <Compile Include="algorithms\GAPSO\Gearbox\IGearbox.cs" />
     <Compile Include="algorithms\sweepline\EventQueue.cs" />
@@ -126,7 +130,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="algorithms\GAPSO\Randomization\" />
     <Folder Include="gs\graphs\" />
     <Folder Include="gs\line_structue\" />
     <Folder Include="gs\plane_structure\" />

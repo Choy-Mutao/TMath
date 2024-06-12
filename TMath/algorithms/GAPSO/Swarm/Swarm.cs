@@ -4,17 +4,24 @@ using tmath.algorithms.GAPSO.InformTopology;
 
 namespace tmath.algorithms.pso
 {
-    public abstract class Swarm : ISwarm
+    public class Swarm<T> : ISwarm where T: IParticle
     {
-        InformTopology<IParticle> particles;
-        IInformStrategy<IParticle> informStrategy;
+        InformTopology<T> particles;
 
         IFitness fitness;
         IGearbox gearbox;
 
+        double mean_fitness;
+        uint Size;
+
+        public Swarm(uint size)
+        {
+            Size = size;
+        }
+
         public void Evaluate()
         {
-            throw new System.NotImplementedException();
+
         }
 
         public List<IParticle> GetNeighbours(in IParticle particle, double radius)
@@ -24,12 +31,12 @@ namespace tmath.algorithms.pso
 
         public void Initialization()
         {
-            throw new System.NotImplementedException();
+
+
         }
 
         public void Move()
         {
-            informStrategy.MakeDecision(particles);
         }
     }
 }

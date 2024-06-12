@@ -2,6 +2,7 @@
 {
     public interface ITermination
     {
-
+        void Update();
+        bool HasReached(ISwarm swarm);
     }
 }

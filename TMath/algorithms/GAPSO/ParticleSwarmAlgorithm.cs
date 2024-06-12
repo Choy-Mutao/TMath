@@ -1,27 +1,44 @@
-﻿namespace tmath.algorithms.pso
-{
+﻿using System;
+using tmath.algorithms.GAPSO.Fitness;
+using tmath.algorithms.pso.Termination;
 
+namespace tmath.algorithms.pso
+{
     public class ParticleSwarmAlgorithm
     {
         ISwarm Swarm;
+        ITermination Termination;
+        IFitness Fitness;
+        IRandomization randomization = new KISSRandomization();
 
-        public ParticleSwarmAlgorithm(ISwarm swarm)
+        public event EventHandler InitializationHandler;
+        public event EventHandler VelocityHandler;
+        public event EventHandler InformHandler;
+        public event EventHandler EvaluateHandler;
+        public event EventHandler TerminateHandler;
+
+        public ParticleSwarmAlgorithm(ISwarm swarm, ITermination termination, IFitness fitness)
         {
             Swarm = swarm;
+            Termination = termination;
+            Fitness = fitness;
         }
 
         public void Start()
         {
             // Initialization
+            Swarm.Initialization();
 
-            // Iteration
-
-            // Evaluation;
+            // Evaluation
+            do
+            {
+                Swarm.Evaluate();
+                Termination.Update();
+            } while (Termination.HasReached(Swarm));
         }
 
         public void Stop()
         {
         }
-
     }
 }

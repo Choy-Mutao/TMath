@@ -7,7 +7,6 @@ namespace tmath.algorithms.pso
     /// </summary>
     public interface ISwarm
     {
-        List<IParticle> GetNeighbours(in IParticle particle, double radius);
         void Initialization();
         void Evaluate();
         void Move();

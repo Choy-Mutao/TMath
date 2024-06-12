@@ -4,18 +4,10 @@ namespace tmath.algorithms.GAPSO.InformTopology
 {
     public abstract class InformTopology<T> where T : IParticle
     {
+        public abstract void Add(T particle);
 
+        public abstract void Inform(T particle);
 
-        public void Inform(T particle)
-        {
-            // Only Initial position;
-            throw new System.NotImplementedException();
-        }
-
-        public void InformAll()
-        {
-            // Only Initial position;
-            throw new System.NotImplementedException();
-        }
+        public abstract void InformAll();
     }
 }

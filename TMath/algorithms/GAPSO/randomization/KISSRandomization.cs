@@ -4,6 +4,8 @@ namespace tmath.algorithms.pso
 {
     public class KISSRandomization : BaseRandomization
     {
+        public static readonly ulong CLERC_SEED = 1294404794;
+
         static ulong RAND_MAX_KISS = 4294967295;
         static ulong kiss_x;
         static ulong kiss_y;
@@ -13,6 +15,8 @@ namespace tmath.algorithms.pso
 
         static ulong kiss_k;
         static ulong kiss_m;
+
+        public KISSRandomization() : this(CLERC_SEED) { }
 
         public KISSRandomization(ulong seed)
         {
