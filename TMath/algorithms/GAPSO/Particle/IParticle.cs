@@ -10,7 +10,9 @@
         int Dimension { get; set; }
         double Fitness { get; set; } // the fitness value at this position
         double Previous_Fitness { get; set; } // the fitness value of this previous best
+        int MoveCount { get; }
         IParticle CreateNew();
+        void Move();
     }
 
 }

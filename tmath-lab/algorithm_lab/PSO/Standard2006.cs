@@ -7,6 +7,8 @@ namespace tmath_lab.algorithm_lab.PSO
     // Use Fitness to describe problem;
     internal class ParabolaFitnsss : IFitness
     {
+        double f_min = 0;
+
         public double Evaluate(IParticle particle)
         {
             double f = 0, p = 0, xd;
@@ -15,7 +17,7 @@ namespace tmath_lab.algorithm_lab.PSO
                 xd = particle.Position[d] - p;
                 f = f + xd * xd;
             }
-            return f;
+            return Math.Abs(f - f_min);
         }
     }
 
@@ -34,6 +36,9 @@ namespace tmath_lab.algorithm_lab.PSO
         public double[] m_bestposition;
         public double[] BestPosition { get => m_bestposition; set => m_bestposition = value; }
 
+        int m_movecount;
+        public int MoveCount => m_movecount;
+
         IRandomization randomization = new KISSRandomization();
         double m_min;
         double m_max;
@@ -50,12 +55,25 @@ namespace tmath_lab.algorithm_lab.PSO
 
             m_fitness = 0;
             m_prefitness = 0;
+            m_movecount = 0;
         }
 
         public IParticle CreateNew()
         {
             DoubleParticle dp = new DoubleParticle(m_dimension, m_min, m_max);
+            dp.m_position = randomization.GetDoubleArray(m_dimension, m_min, m_max);
+            for (int i = 0; i < m_dimension; i++)
+            {
+                dp.m_velocity[i] = (randomization.GetDouble(m_min, m_max) - m_position[i]) / 2;
+            }
             return dp;
+        }
+
+        public void Move()
+        {
+            for (int d = 0; d < m_dimension; d++)
+                m_position[d] = m_position[d] + m_velocity[d];
+            m_movecount++;
         }
     }
 
@@ -69,7 +87,7 @@ namespace tmath_lab.algorithm_lab.PSO
             DoubleParticle doubleParticle = new DoubleParticle(2, -100, 100);
 
             int S = 10 + (int)(2 * Math.Sqrt(2));
-            var swarm = new Swarm<DoubleParticle>(S, doubleParticle);
+            var swarm = new Swarm<DoubleParticle>(S, doubleParticle, new SPSO2006Gearbox());
 
             var termination = new ExecuteLimtTermination(100);
             var fitness = new ParabolaFitnsss();

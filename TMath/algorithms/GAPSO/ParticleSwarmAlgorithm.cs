@@ -37,18 +37,20 @@ namespace tmath.algorithms.pso
             // Evaluation
             do
             {
+                Swarm.Move();
                 Evaluate();
                 Termination.Update();
-            } while (Termination.HasReached(Swarm));
+            } while (!Termination.HasReached(Swarm));
         }
 
         void Evaluate()
         {
-            Swarm.CurrentParticles();
-        }
-
-        public void Stop()
-        {
+            var particles = Swarm.CurrentParticles();
+            int S = particles.Length;
+            for (int s = 0; s < S; s++)
+            {
+                particles[s].Fitness = Fitness.Evaluate(particles[s]);
+            }
         }
     }
 }

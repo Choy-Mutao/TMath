@@ -6,7 +6,7 @@ namespace tmath.algorithms.pso
     {
         public static readonly ulong CLERC_SEED = 1294404794;
 
-        static ulong RAND_MAX_KISS = 4294967295;
+        static ulong RAND_MAX_KISS = ulong.MaxValue;
         static ulong kiss_x;
         static ulong kiss_y;
         static ulong kiss_z;
@@ -40,7 +40,7 @@ namespace tmath.algorithms.pso
             return kiss_x + kiss_y + kiss_w;
         }
 
-        public override double GetDouble() => KISS() / RAND_MAX_KISS;
+        public override double GetDouble() => (double)KISS() / RAND_MAX_KISS;
 
     }
 }
