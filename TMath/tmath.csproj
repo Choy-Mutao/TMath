@@ -57,9 +57,11 @@
     <Compile Include="algorithms\GAPSO\Swarm\ISwarm.cs" />
     <Compile Include="algorithms\GAPSO\Particle\IParticle.cs" />
     <Compile Include="algorithms\GAPSO\ParticleSwarmAlgorithm.cs" />
-    <Compile Include="algorithms\GAPSO\Swarm\Swarm.cs" />
+    <Compile Include="algorithms\GAPSO\Swarm\MultipleObjectiveSwarm.cs" />
+    <Compile Include="algorithms\GAPSO\Swarm\SingleObjectiveSwarm.cs" />
     <Compile Include="algorithms\GAPSO\Termination\ExecuteLimtTermination.cs" />
     <Compile Include="algorithms\GAPSO\Termination\FailureTermination.cs" />
+    <Compile Include="algorithms\GAPSO\Termination\FitnessTermination.cs" />
     <Compile Include="algorithms\GAPSO\Termination\ITermination.cs" />
     <Compile Include="algorithms\GAPSO\Gearbox\IGearbox.cs" />
     <Compile Include="algorithms\sweepline\EventQueue.cs" />

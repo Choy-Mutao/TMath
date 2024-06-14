@@ -1,7 +1,4 @@
-﻿using tmath.algorithms.pso;
-using tmath.algorithms.pso.Termination;
-
-namespace tmath.algorithms.GAPSO.Termination
+﻿namespace tmath.algorithms.pso
 {
     public class ExecuteLimtTermination : ITermination
     {
@@ -10,11 +7,9 @@ namespace tmath.algorithms.GAPSO.Termination
 
         public ExecuteLimtTermination(int max) => MaxIterationCount = max;
 
-        public void Update() => IterationCount++;
-
         public bool HasReached(ISwarm swarm)
         {
-            return !(IterationCount < MaxIterationCount);
+            return !(IterationCount++ < MaxIterationCount);
         }
     }
 }

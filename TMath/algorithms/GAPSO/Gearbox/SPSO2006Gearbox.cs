@@ -1,9 +1,11 @@
-﻿namespace tmath.algorithms.pso
+﻿using System;
+
+namespace tmath.algorithms.pso
 {
     public class SPSO2006Gearbox : IGearbox
     {
-        double w;
-        double c;
+        readonly double w = 1 / (2 * Math.Log(2));
+        readonly double c = 0.5 + Math.Log(2);
 
         public IRandomization randomization;
 
@@ -12,17 +14,13 @@
             randomization = new KISSRandomization();
         }
 
-        public void Drive(IParticle particle)
+        public void Drive(ref IParticle particle)
         {
             int D = particle.Dimension;
-
-            var v = particle.Velocity;
-            var p = particle.Position;
-            var bp = particle.BestPosition;
-
             for(int d = 0; d < D; d++)
             {
-                particle.Velocity[d] =  v[d] + randomization.GetDouble(0, c) * (bp[d] - p[d]);
+                particle.Velocity[d] = w * particle.Velocity[d] + randomization.GetDouble(0,c) * (particle.BestPosition[d] - particle.Position[d]);
+                particle.Velocity[d] = particle.Velocity[d] + randomization.GetDouble(0, c) * (particle.GlobalBest[d] - particle.Position[d]);
             }
         }
     }

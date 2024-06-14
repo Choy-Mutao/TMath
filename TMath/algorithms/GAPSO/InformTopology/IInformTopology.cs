@@ -1,13 +1,11 @@
-﻿namespace tmath.algorithms.pso
-{
-    public interface IInformTopology
-    {
-        IParticle[] Particles { get; }
-        int InformCount { get; }
+﻿//namespace tmath.algorithms.pso
+//{
+//    public interface IInformTopology
+//    {
+//        IParticle[] Particles { get; }
+//        int InformCount { get; }
 
-        void Build();
-        void UpdateInformation();
-
-        IParticle[] GetInformedParticles();
-    }
-}
+//        void Build();
+//        void Move(IGearbox gearbox);
+//    }
+//}

@@ -1,5 +1,4 @@
 ﻿using System;
-using tmath.algorithms.pso.Termination;
 
 namespace tmath.algorithms.pso
 {
@@ -7,7 +6,6 @@ namespace tmath.algorithms.pso
     {
         ISwarm Swarm;
         ITermination Termination;
-        IFitness Fitness;
         IRandomization randomization = new KISSRandomization();
 
         public event EventHandler InitializationHandler;
@@ -16,41 +14,26 @@ namespace tmath.algorithms.pso
         public event EventHandler EvaluateHandler;
         public event EventHandler TerminateHandler;
 
-        public ParticleSwarmAlgorithm(ISwarm swarm, ITermination termination, IFitness fitness)
+        public ParticleSwarmAlgorithm(ISwarm swarm, ITermination termination)
         {
             Swarm = swarm;
             Termination = termination;
-            Fitness = fitness;
         }
 
         public void Start()
         {
 
             ExceptionHelper.ThrowIfNull("swarm", Swarm);
-            ExceptionHelper.ThrowIfNull("fitness", Fitness);
             ExceptionHelper.ThrowIfNull("randomization", randomization);
             ExceptionHelper.ThrowIfNull("termination", Termination);
 
             // Build
             Swarm.Initialization();
-
             // Evaluation
             do
             {
-                Swarm.Move();
-                Evaluate();
-                Termination.Update();
+                Swarm.Evaluate();
             } while (!Termination.HasReached(Swarm));
-        }
-
-        void Evaluate()
-        {
-            var particles = Swarm.CurrentParticles();
-            int S = particles.Length;
-            for (int s = 0; s < S; s++)
-            {
-                particles[s].Fitness = Fitness.Evaluate(particles[s]);
-            }
         }
     }
 }

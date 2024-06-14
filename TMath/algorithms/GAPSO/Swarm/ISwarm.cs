@@ -6,10 +6,9 @@
     public interface ISwarm
     {
         double Best_Fitness { get; }
+        IParticle BestParticle { get; }
         IGearbox GearBox { get; }
-        IInformTopology Topology { get; }
         void Initialization();
-        void Move();
-        IParticle[] CurrentParticles();
+        void Evaluate();
     }
 }

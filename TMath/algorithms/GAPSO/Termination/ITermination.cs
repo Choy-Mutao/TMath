@@ -1,8 +1,7 @@
-﻿namespace tmath.algorithms.pso.Termination
+﻿namespace tmath.algorithms.pso
 {
     public interface ITermination
     {
-        void Update();
         bool HasReached(ISwarm swarm);
     }
 }

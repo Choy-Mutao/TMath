@@ -1,6 +1,6 @@
 ﻿namespace tmath.algorithms.pso
 {
-    internal class FailureTermination
+    internal class MultipleObjectiveSwarm
     {
     }
 }
