@@ -1,4 +1,5 @@
 ﻿using System;
+using tmath.geometry;
 
 namespace tmath.geo_math.curve
 {
@@ -45,6 +46,46 @@ namespace tmath.geo_math.curve
                 result.Add(new TPoint2D(x, y));
             }
             return result;
+        }
+
+        public void DistanceToPoint(TPoint2D point, out TPoint2D p1, out TPoint2D p2)
+        {
+            var dir = (point - Center).ToVector().GetNormal();
+            double theta = dir.Angle2DTo(TVector2D.XAxis);
+
+            if (theta < start_radian)
+            {
+                p1 = Center + TVector2D.XAxis.RotateByPoint(start_radian, TPoint2D.ORIGIN_2D) * Radius;
+            }
+            else if (theta > start_radian + center_radian)
+            {
+                p1 = Center + TVector2D.XAxis.RotateByPoint(start_radian + center_radian, TPoint2D.ORIGIN_2D) * Radius;
+            }
+            else
+            {
+                p1 = (Center + dir * Radius);
+            }
+            p2 = point;
+        }
+
+        public void DistanceToSegment(TLineSegment2d segment, out TPoint2D p1, out TPoint2D p2)
+        {
+            var sp = segment.SP;
+            var ep = segment.EP;
+
+            double l1 = sp.DistanceTo(Center);
+            double l2 = ep.DistanceTo(Center);
+
+            DistanceToPoint(sp, out p1, out p2);
+            DistanceToPoint(ep, out p1, out p2);
+
+            if (NumberUtils.CompValue(l1, l2) == 0)
+            {
+                p2 = (sp + ep) / 2;
+                var dir = (p2 - Center).ToVector().GetNormal();
+                p1 = Center + dir * Radius;
+                return;
+            }
         }
     }
 
