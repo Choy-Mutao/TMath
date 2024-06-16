@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RTree;
+using System;
 using tmath.geometry;
 
 namespace tmath.geo_math.curve
@@ -11,8 +12,21 @@ namespace tmath.geo_math.curve
 
     public abstract class Arc<T, V> : Circle<T, V> where T : IPoint<T, V> where V : IVector<V>
     {
+        private double m_startradian;
         // range; [0, 2Pi]
-        public double start_radian;
+        public double start_radian
+        {
+            get => m_startradian;
+            set
+            {
+                if (value < 0 || value >= 2 * Math.PI)
+                    throw new ArgumentOutOfRangeException(nameof(start_radian), "Start Angle(Radian) must be in the range [0, 2Π]");
+                m_startradian = value;
+            }
+        }
+
+        public abstract TPoint2D StartPoint { get; }
+        public abstract TPoint2D EndPoint { get; }
 
         // radian to end
         public double center_radian;
@@ -23,6 +37,41 @@ namespace tmath.geo_math.curve
 
     public class TArc2D : Arc<TPoint2D, TVector2D>
     {
+
+        public override TPoint2D StartPoint
+        {
+            get
+            {
+                double startX = Center.X + Radius * Math.Cos(start_radian);
+                double startY = Center.Y + Radius * Math.Sin(start_radian);
+                return new TPoint2D(startX, startY);
+            }
+        }
+
+        public override TPoint2D EndPoint
+        {
+            get
+            {
+                double endAngle;
+                if (dir == ARC_DIR.CW)
+                    endAngle = start_radian - center_radian;
+                else
+                    endAngle = start_radian + center_radian;
+
+                // Normalize the endAngle to be within the range [0, 2π)
+                endAngle = endAngle % (2 * Math.PI);
+                if (endAngle < 0)
+                {
+                    endAngle += 2 * Math.PI;
+                }
+
+                double endX = Center.X + Radius * Math.Cos(endAngle);
+                double endY = Center.Y + Radius * Math.Sin(endAngle);
+                return new TPoint2D(endX, endY);
+            }
+        }
+
+
         public TArc2D(TPoint2D center, double radius, double s_r/*range; [0, 2Pi]*/, double c_r/*range; [0, 2Pi]*/, ARC_DIR _dir = ARC_DIR.CCW)
         {
             Center = center;
@@ -48,49 +97,147 @@ namespace tmath.geo_math.curve
             return result;
         }
 
-        public void DistanceToPoint(TPoint2D point, out TPoint2D p1, out TPoint2D p2)
+        public double DistanceToPoint(TPoint2D point, out TPoint2D p2)
         {
-            var dir = (point - Center).ToVector().GetNormal();
-            double theta = dir.Angle2DTo(TVector2D.XAxis);
+            double dx = point.X - Center.X;
+            double dy = point.Y - Center.Y;
+            double distanceToCenter = point.DistanceTo(Center);
+            double angleToPoint = Math.Atan2(dx, dy);
 
-            if (theta < start_radian)
+            // Normalize the angleToPoint to be within the range [0, 2pi]
+            angleToPoint = angleToPoint % (2 * Math.PI);
+            if (angleToPoint < 0)
+                angleToPoint += 2 * Math.PI;
+
+            double startAngleNormalized = start_radian % (2 * Math.PI);
+            if (startAngleNormalized < 0)
             {
-                p1 = Center + TVector2D.XAxis.RotateByPoint(start_radian, TPoint2D.ORIGIN_2D) * Radius;
+                startAngleNormalized += 2 * Math.PI;
             }
-            else if (theta > start_radian + center_radian)
+
+            double endAngle;
+            if (dir == ARC_DIR.CW)
             {
-                p1 = Center + TVector2D.XAxis.RotateByPoint(start_radian + center_radian, TPoint2D.ORIGIN_2D) * Radius;
+                endAngle = startAngleNormalized - center_radian;
             }
             else
             {
-                p1 = (Center + dir * Radius);
+                endAngle = startAngleNormalized + center_radian;
             }
-            p2 = point;
+
+            // Normalize the endAngle to be within the range [0, 2π)
+            endAngle = endAngle % (2 * Math.PI);
+            if (endAngle < 0)
+            {
+                endAngle += 2 * Math.PI;
+            }
+
+            bool isWithinArc = false;
+            if (dir == ARC_DIR.CW)
+            {
+                if (startAngleNormalized > endAngle)
+                {
+                    isWithinArc = angleToPoint >= endAngle && angleToPoint <= startAngleNormalized;
+                }
+                else
+                {
+                    isWithinArc = angleToPoint >= endAngle || angleToPoint <= startAngleNormalized;
+                }
+            }
+            else
+            {
+                if (startAngleNormalized < endAngle)
+                {
+                    isWithinArc = angleToPoint >= startAngleNormalized && angleToPoint <= endAngle;
+                }
+                else
+                {
+                    isWithinArc = angleToPoint >= startAngleNormalized || angleToPoint <= endAngle;
+                }
+            }
+
+            if (isWithinArc)
+            {
+                var p2x = Center.X + Radius * Math.Cos(angleToPoint);
+                var p2y = Center.Y + Radius * Math.Sin(angleToPoint);
+                p2 = new TPoint2D(p2x, p2y);
+
+                return (double)Math.Abs(distanceToCenter - Radius);
+            }
+            else
+            {
+                double distanceToStart = Math.Sqrt((point.X - StartPoint.X) * (point.X - StartPoint.X) + (point.Y - StartPoint.Y) * (point.Y - StartPoint.Y));
+                double distanceToEnd = Math.Sqrt((point.X - EndPoint.X) * (point.X - EndPoint.X) + (point.Y - EndPoint.Y) * (point.Y - EndPoint.Y));
+
+                if (distanceToStart < distanceToEnd)
+                    p2 = StartPoint;
+                else
+                    p2 = EndPoint;
+
+                return Math.Min(distanceToStart, distanceToEnd);
+            }
+
         }
 
-        public void DistanceToSegment(TLineSegment2d segment, out TPoint2D p1, out TPoint2D p2)
+        public double DistanceToSegment(TLineSegment2d segment, out TPoint2D pOnArc, out TPoint2D pOnSegment)
         {
-            var sp = segment.SP;
-            var ep = segment.EP;
+            // Initialize output points
+            pOnArc = new TPoint2D();
+            pOnSegment = new TPoint2D();
 
-            double l1 = sp.DistanceTo(Center);
-            double l2 = ep.DistanceTo(Center);
+            double minDistance = double.MaxValue;
 
-            DistanceToPoint(sp, out p1, out p2);
-            DistanceToPoint(ep, out p1, out p2);
+            // Calculate distances to the segment's start and end points
+            double distanceToStart = DistanceToPoint(segment.SP, out TPoint2D arcStart);
+            double distanceToEnd = DistanceToPoint(segment.EP, out TPoint2D arcEnd);
 
-            if (NumberUtils.CompValue(l1, l2) == 0)
+            // Check if the minimum distance is to the start or end of the segment
+            if (distanceToStart < minDistance)
             {
-                p2 = (sp + ep) / 2;
-                var dir = (p2 - Center).ToVector().GetNormal();
-                p1 = Center + dir * Radius;
-                return;
+                minDistance = distanceToStart;
+                pOnArc = arcStart;
+                pOnSegment = segment.SP;
             }
+
+            if (distanceToEnd < minDistance)
+            {
+                minDistance = distanceToEnd;
+                pOnArc = arcEnd;
+                pOnSegment = segment.SP;
+            }
+
+            // Check the perpendicular distance from the segment to the arc
+            double dx = segment.EP.X - segment.SP.X;
+            double dy = segment.EP.Y - segment.SP.Y;
+            double lengthSquared = dx * dx + dy * dy;
+
+            if (lengthSquared != 0)
+            {
+                double t = ((Center.X - segment.SP.X) * dx + (Center.Y - segment.SP.Y) * dy) / lengthSquared;
+                t = Math.Max(0, Math.Min(1, t));
+                double projX = segment.SP.X + t * dx;
+                double projY = segment.SP.Y + t * dy;
+
+                double distanceToProj = DistanceToPoint(new TPoint2D(projX, projY), out TPoint2D arcProj);
+
+                if (distanceToProj < minDistance)
+                {
+                    minDistance = distanceToProj;
+                    pOnArc = new TPoint2D(arcProj.X, arcProj.Y);
+                    pOnSegment = new TPoint2D(projX, projY);
+                }
+            }
+
+            return minDistance;
         }
     }
 
     public class TArc3D : Arc<TPoint3D, TVector3D>
     {
+        public override TPoint2D StartPoint => throw new NotImplementedException();
+
+        public override TPoint2D EndPoint => throw new NotImplementedException();
+
         public override TPointCollection<TPoint3D, TVector3D> Discretize(int number_of_pnts)
         {
             throw new System.NotImplementedException();
