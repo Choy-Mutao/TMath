@@ -102,7 +102,7 @@ namespace tmath.geo_math.curve
             double dx = point.X - Center.X;
             double dy = point.Y - Center.Y;
             double distanceToCenter = point.DistanceTo(Center);
-            double angleToPoint = Math.Atan2(dx, dy);
+            double angleToPoint = Math.Atan2(dy, dx);
 
             // Normalize the angleToPoint to be within the range [0, 2pi]
             angleToPoint = angleToPoint % (2 * Math.PI);
@@ -203,7 +203,7 @@ namespace tmath.geo_math.curve
             {
                 minDistance = distanceToEnd;
                 pOnArc = arcEnd;
-                pOnSegment = segment.SP;
+                pOnSegment = segment.EP;
             }
 
             // Check the perpendicular distance from the segment to the arc
