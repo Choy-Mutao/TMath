@@ -1,5 +1,4 @@
-﻿using RTree;
-using System;
+﻿using System;
 using tmath.geometry;
 
 namespace tmath.geo_math.curve
@@ -229,6 +228,111 @@ namespace tmath.geo_math.curve
             }
 
             return minDistance;
+        }
+
+        public bool IsPointOn(in TPoint2D point) => IsPointOn(point, Tolerance.Global);
+
+        public bool IsPointOn(in TPoint2D point, Tolerance tol)
+        {
+            double angle = Math.Atan2(point.Y - Center.Y, point.X - Center.X);
+            angle = (angle + 2 * Math.PI) % (2 * Math.PI);
+            return NumberUtils.CompValue(point.DistanceTo(Center), Radius, tol.EqualPoint) == 0 &&
+                (angle - start_radian) < (int)dir * center_radian;
+        }
+
+        public INTER_NUM IntersectWith(TLine2D line, out TPoint2D ip1, out TPoint2D ip2)
+        {
+            INTER_NUM i = INTER_NUM.ZERO;
+            ip1 = TPoint2D.NULL;
+            ip2 = TPoint2D.NULL;
+
+            double r = Radius;
+            double x0 = Center.X, y0 = Center.Y;
+            double x1 = line.P0.X, x2 = line.P1.X;
+            double y1 = line.P0.Y, y2 = line.P1.Y;
+
+            double dx = x2 - x1;
+            double dy = y2 - y1;
+
+            var a = dx * dx + dy * dy;
+            var b = 2 * (dx * (x1 - x0) + dy * (y1 - y0));
+            var c = (x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0) - r * r;
+
+
+            double[] t_values;
+            var discriminant = b * b - 4 * a * c;
+            if (discriminant < 0) // 无解
+            {
+                t_values = new double[0];
+            }
+            else if (discriminant == 0)
+            {
+                t_values = new double[1];
+                t_values[0] = -b / 2 * a;
+            }
+            else
+            {
+                double sqrt_d = Math.Sqrt(discriminant);
+                t_values = new double[2];
+                t_values[0] = (-b + sqrt_d) / (2 * a);
+                t_values[1] = (-b - sqrt_d) / (2 * a);
+            }
+
+            int count = 0;
+            if (t_values.Length == 0) { ip1 = TPoint2D.NULL; ip2 = TPoint2D.NULL; }
+            else if (t_values.Length == 1)
+            {
+                var t = t_values[0];
+                if (t >= 0 && t <= 1)
+                {
+                    var x = x1 + t * dx;
+                    var y = y1 + t * dy;
+
+                    ip1 = new TPoint2D(x, y);
+                    i = INTER_NUM.ONE;
+
+                    if (!IsPointOn(ip1))
+                        ip1 = TPoint2D.NULL;
+                    else count++;
+                }
+            }
+            else if (t_values.Length == 2)
+            {
+                double t1 = t_values[0];
+                if (t1 >= 0 && t1 <= 1)
+                {
+                    var x = x1 + t1 * dx;
+                    var y = y1 + t1 * dy;
+                    ip1 = new TPoint2D(x, y);
+                    if (!IsPointOn(ip1))
+                        ip1 = TPoint2D.NULL;
+                    else count++;
+                }
+
+                double t2 = t_values[1];
+                if (t2 >= 0 && t2 <= 1)
+                {
+                    double x = x1 + t2 * dx;
+                    double y = y1 + t2 * dy;
+                    ip2 = new TPoint2D(x, y);
+                    if (!IsPointOn(ip2))
+                        ip2 = TPoint2D.NULL;
+                    else count++;
+                }
+            }
+
+            switch (count)
+            {
+                case 0:
+                    i = INTER_NUM.ZERO; break;
+                case 1:
+                    i = INTER_NUM.ONE; break;
+                case 2:
+                    i = INTER_NUM.TWO; break;
+                default:
+                    break;
+            }
+            return i;
         }
     }
 
