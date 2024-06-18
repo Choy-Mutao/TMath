@@ -204,7 +204,36 @@ namespace tmath_lab.Geo_Lab
             TPoint2D ip1, ip2;
             var i = quarter_arc.IntersectWith(tline, out ip1, out ip2);
             Assert.IsTrue(i == INTER_NUM.TWO);
+            SvgUtils.AddOpenSubject(svg, new PathsD() { new PathD() { new PointD(p0.X, p0.Y), new PointD(p1.X, p1.Y) } });
 
+            p0 = new TPoint2D(6, 0); p1 = new TPoint2D(0, 6);
+            tline = new TLine2D(p0, p1);
+            i = quarter_arc.IntersectWith(tline, out ip1, out ip2);
+            Assert.IsTrue(i == INTER_NUM.TWO);
+            SvgUtils.AddOpenSubject(svg, new PathsD() { new PathD() { new PointD(p0.X, p0.Y), new PointD(p1.X, p1.Y) } });
+
+            p0 = new TPoint2D(0, 0); p1 = new TPoint2D(6, 6);
+            tline = new TLine2D(p0, p1);
+            i = quarter_arc.IntersectWith(tline, out ip1, out ip2);
+            Assert.IsTrue(i == INTER_NUM.ONE);
+            SvgUtils.AddOpenSubject(svg, new PathsD() { new PathD() { new PointD(p0.X, p0.Y), new PointD(p1.X, p1.Y) } });
+
+            p0 = new TPoint2D(3, 0); p1 = new TPoint2D(3, 6);
+            tline = new TLine2D(p0, p1);
+            i = quarter_arc.IntersectWith(tline, out ip1, out ip2);
+            Assert.IsTrue(i == INTER_NUM.ONE);
+            SvgUtils.AddOpenSubject(svg, new PathsD() { new PathD() { new PointD(p0.X, p0.Y), new PointD(p1.X, p1.Y) } });
+
+            p0 = new TPoint2D(0, 3); p1 = new TPoint2D(6, 3);
+            tline = new TLine2D(p0, p1);
+            i = quarter_arc.IntersectWith(tline, out ip1, out ip2);
+            Assert.IsTrue(i == INTER_NUM.ONE);
+            SvgUtils.AddOpenSubject(svg, new PathsD() { new PathD() { new PointD(p0.X, p0.Y), new PointD(p1.X, p1.Y) } });
+
+            p0 = new TPoint2D(0, -3); p1 = new TPoint2D(-3, 0);
+            tline = new TLine2D(p0, p1);
+            i = quarter_arc.IntersectWith(tline, out ip1, out ip2);
+            Assert.IsTrue(i == INTER_NUM.ZERO);
             SvgUtils.AddOpenSubject(svg, new PathsD() { new PathD() { new PointD(p0.X, p0.Y), new PointD(p1.X, p1.Y) } });
 
 
