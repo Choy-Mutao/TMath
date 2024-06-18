@@ -199,7 +199,8 @@ namespace tmath.geometryutils
     /// </summary>
     public static class NFPUtil
     {
-        const double TOL = 1e-4;
+        static double TOL = 1e-4;
+
         struct TouchType
         {
             public int type { get; set; }
@@ -1173,7 +1174,7 @@ namespace tmath.geometryutils
             return null;
         }
 
-        public static bool IsRectangle(List<NFPPoint> poly, double tolerance = TOL)
+        public static bool IsRectangle(List<NFPPoint> poly, double tolerance)
         {
             bool isb = GetPolygonBounds(poly, out Bounds bb);
             if (!isb || poly.Count < 4) return false;
@@ -1275,8 +1276,9 @@ namespace tmath.geometryutils
         /// <param name="inside">if the inside flag is true, B is orbited inside of A rather than outside</param>
         /// <param name="searchEdges">if the searchEdges flag is true, all edges of A are expolred for NFPs - multiple</param>
         /// <returns></returns>
-        public static List<TreeNode<NFPPoint>> NoFitPolygon(in TreeNode<NFPPoint> A, in TreeNode<NFPPoint> B, bool inside = false, bool searchEdges = false)
+        public static List<TreeNode<NFPPoint>> NoFitPolygon(in TreeNode<NFPPoint> A, in TreeNode<NFPPoint> B, bool inside = false, bool searchEdges = false, double tolerance = 1e-4)
         {
+            TOL = tolerance;
 
             if (A.Count < 3 || B.Count < 3) return null;
 
