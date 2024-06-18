@@ -16,12 +16,7 @@ namespace tmath.geo_math.curve
         public double start_radian
         {
             get => m_startradian;
-            set
-            {
-                if (value < 0 || value >= 2 * Math.PI)
-                    throw new ArgumentOutOfRangeException(nameof(start_radian), "Start Angle(Radian) must be in the range [0, 2Π]");
-                m_startradian = value;
-            }
+            set => m_startradian = (value + 2 * Math.PI) % (2 * Math.PI);
         }
 
         public abstract TPoint2D StartPoint { get; }
@@ -234,10 +229,19 @@ namespace tmath.geo_math.curve
 
         public bool IsPointOn(in TPoint2D point, Tolerance tol)
         {
-            double angle = Math.Atan2(point.Y - Center.Y, point.X - Center.X);
-            angle = (angle + 2 * Math.PI) % (2 * Math.PI);
+            var tmp_sr = start_radian;
+            if (dir == ARC_DIR.CW) tmp_sr = start_radian - center_radian;
+            tmp_sr = (tmp_sr + 2 * Math.PI) % (2 * Math.PI);
+            double x = Center.X + Radius * Math.Cos(tmp_sr);
+            double y = Center.Y + Radius * Math.Sin(tmp_sr);
+            var tmp_sp = new TPoint2D(x, y);
+
+            var i = TPoint2D.IsLeft(Center, tmp_sp, point);
+            var angle = Math.Acos((tmp_sp - Center).ToVector().GetNormal().Dot((point - Center).ToVector().GetNormal()));
+            angle = (i >= 0 ? angle : 2 * Math.PI - angle);
+
             return NumberUtils.CompValue(point.DistanceTo(Center), Radius, tol.EqualPoint) == 0 &&
-                (angle - start_radian) < (int)dir * center_radian;
+                angle <= center_radian;
         }
 
         public INTER_NUM IntersectWith(TLine2D line, out TPoint2D ip1, out TPoint2D ip2)

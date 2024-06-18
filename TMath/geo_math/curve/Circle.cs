@@ -22,14 +22,16 @@ namespace tmath.geo_math.curve
         public override TPointCollection<TPoint2D, TVector2D> Discretize(int number_of_pnts)
         {
             TPoint2DCollection result = new TPoint2DCollection();
-            for(int i = 0; i < number_of_pnts; i++) 
-            {
-                double angle = 2 * Math.PI * i / number_of_pnts;
-                double x = Center.X + Radius * Math.Cos(angle);
-                double y = Center.Y + Radius * Math.Sin(angle);
-                result.Add(new TPoint2D(x, y));
-            }
+            for (int i = 0; i < number_of_pnts; i++)
+                result.Add(GetPointAtTheta(2 * Math.PI * i / number_of_pnts));
             return result;
+        }
+
+        public TPoint2D GetPointAtTheta(double radian_angle)
+        {
+            double x = Center.X + Radius * Math.Cos(radian_angle);
+            double y = Center.Y + Radius * Math.Sin(radian_angle);
+            return new TPoint2D(x, y);
         }
     }
 
