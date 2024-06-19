@@ -37,7 +37,7 @@ namespace tmath.geometry
         /// <param name="pt"></param>
         /// <param name="tol"></param>
         /// <returns></returns>
-        public virtual bool IsPointOn(T P, Tolerance tol) { throw new NotImplementedException(); }
+        public virtual bool IsPointOn(T P, Tolerance tol) => NumberUtils.CompValue((P.DistanceTo(SP) + P.DistanceTo(EP)), Length(), tol.EqualPoint) == 0;
 
 
     }
