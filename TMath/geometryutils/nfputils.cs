@@ -276,7 +276,7 @@ namespace tmath.geometryutils
                 var xj = polygon[j].X + offsetx;
                 var yj = polygon[j].Y + offsety;
 
-                if (CommonUtil.AlmostEqual(xi, point.X) && CommonUtil.AlmostEqual(yi, point.Y))
+                if (CommonUtil.AlmostEqual(xi, point.X, TOL) && CommonUtil.AlmostEqual(yi, point.Y, TOL))
                 {
                     return null; // no result
                 }
@@ -286,7 +286,7 @@ namespace tmath.geometryutils
                     return false; // exactly on the segment
                 }
 
-                if (CommonUtil.AlmostEqual(xi, xj) && CommonUtil.AlmostEqual(yi, yj))
+                if (CommonUtil.AlmostEqual(xi, xj, TOL) && CommonUtil.AlmostEqual(yi, yj, TOL))
                 { // ignore very small lines
                     continue;
                 }
@@ -349,23 +349,23 @@ namespace tmath.geometryutils
                     var nextaindex = (i + 1 == A.Count - 1) ? 0 : i + 2;
 
                     // go even further back if we happen to hit on a loop end point
-                    if (B[prevbindex] == B[j] || (CommonUtil.AlmostEqual(B[prevbindex].X, B[j].X) && CommonUtil.AlmostEqual(B[prevbindex].Y, B[j].Y)))
+                    if (B[prevbindex] == B[j] || (CommonUtil.AlmostEqual(B[prevbindex].X, B[j].X, TOL) && CommonUtil.AlmostEqual(B[prevbindex].Y, B[j].Y, TOL)))
                     {
                         prevbindex = (prevbindex == 0) ? B.Count - 1 : prevbindex - 1;
                     }
 
-                    if (A[prevaindex] == A[i] || (CommonUtil.AlmostEqual(A[prevaindex].X, A[i].X) && CommonUtil.AlmostEqual(A[prevaindex].Y, A[i].Y)))
+                    if (A[prevaindex] == A[i] || (CommonUtil.AlmostEqual(A[prevaindex].X, A[i].X, TOL) && CommonUtil.AlmostEqual(A[prevaindex].Y, A[i].Y, TOL)))
                     {
                         prevaindex = (prevaindex == 0) ? A.Count - 1 : prevaindex - 1;
                     }
 
                     // go even further forward if we happen to hit on a loop end point
-                    if (B[nextbindex] == B[j + 1] || (CommonUtil.AlmostEqual(B[nextbindex].X, B[j + 1].X) && CommonUtil.AlmostEqual(B[nextbindex].Y, B[j + 1].Y)))
+                    if (B[nextbindex] == B[j + 1] || (CommonUtil.AlmostEqual(B[nextbindex].X, B[j + 1].X, TOL) && CommonUtil.AlmostEqual(B[nextbindex].Y, B[j + 1].Y, TOL)))
                     {
                         nextbindex = (nextbindex == B.Count - 1) ? 0 : nextbindex + 1;
                     }
 
-                    if (A[nextaindex] == A[i + 1] || (CommonUtil.AlmostEqual(A[nextaindex].X, A[i + 1].X) && CommonUtil.AlmostEqual(A[nextaindex].Y, A[i + 1].Y)))
+                    if (A[nextaindex] == A[i + 1] || (CommonUtil.AlmostEqual(A[nextaindex].X, A[i + 1].X, TOL) && CommonUtil.AlmostEqual(A[nextaindex].Y, A[i + 1].Y, TOL)))
                     {
                         nextaindex = (nextaindex == A.Count - 1) ? 0 : nextaindex + 1;
                     }
@@ -376,7 +376,7 @@ namespace tmath.geometryutils
                         b3 = new NFPPoint(B[nextbindex].X + Boffsetx, B[nextbindex].Y + Boffsety);
 
 
-                    if (CommonUtil.OnSegment(a1.ToPoint2d(), a2.ToPoint2d(), b1.ToPoint2d()) || (CommonUtil.AlmostEqual(a1.X, b1.X) && CommonUtil.AlmostEqual(a1.Y, b1.Y)))
+                    if (CommonUtil.OnSegment(a1.ToPoint2d(), a2.ToPoint2d(), b1.ToPoint2d()) || (CommonUtil.AlmostEqual(a1.X, b1.X, TOL) && CommonUtil.AlmostEqual(a1.Y, b1.Y, TOL)))
                     {
                         // if a point is on a segment, it could intersect or it could not. Check via the neighboring points
                         var b0in = PointInPolygon(b0.ToPoint2d(), A);
@@ -393,7 +393,7 @@ namespace tmath.geometryutils
                         }
                     }
 
-                    if (CommonUtil.OnSegment(a1.ToPoint2d(), a2.ToPoint2d(), b2.ToPoint2d()) || (CommonUtil.AlmostEqual(a2.X, b2.X) && CommonUtil.AlmostEqual(a2.Y, b2.Y)))
+                    if (CommonUtil.OnSegment(a1.ToPoint2d(), a2.ToPoint2d(), b2.ToPoint2d()) || (CommonUtil.AlmostEqual(a2.X, b2.X, TOL) && CommonUtil.AlmostEqual(a2.Y, b2.Y, TOL)))
                     {
                         // if a point is on a segment, it could intersect or it could not. Check via the neighboring points
                         var b1in = PointInPolygon(b1.ToPoint2d(), A);
@@ -410,7 +410,7 @@ namespace tmath.geometryutils
                         }
                     }
 
-                    if (CommonUtil.OnSegment(b1.ToPoint2d(), b2.ToPoint2d(), a1.ToPoint2d()) || (CommonUtil.AlmostEqual(a1.X, b2.X) && CommonUtil.AlmostEqual(a1.Y, b2.Y)))
+                    if (CommonUtil.OnSegment(b1.ToPoint2d(), b2.ToPoint2d(), a1.ToPoint2d()) || (CommonUtil.AlmostEqual(a1.X, b2.X, TOL) && CommonUtil.AlmostEqual(a1.Y, b2.Y, TOL)))
                     {
                         // if a point is on a segment, it could intersect or it could not. Check via the neighboring points
                         var a0in = PointInPolygon(a0.ToPoint2d(), B);
@@ -427,7 +427,7 @@ namespace tmath.geometryutils
                         }
                     }
 
-                    if (CommonUtil.OnSegment(b1.ToPoint2d(), b2.ToPoint2d(), a2.ToPoint2d()) || (CommonUtil.AlmostEqual(a2.X, b1.X) && CommonUtil.AlmostEqual(a2.Y, b1.Y)))
+                    if (CommonUtil.OnSegment(b1.ToPoint2d(), b2.ToPoint2d(), a2.ToPoint2d()) || (CommonUtil.AlmostEqual(a2.X, b1.X, TOL) && CommonUtil.AlmostEqual(a2.Y, b1.Y, TOL)))
                     {
                         // if a point is on a segment, it could intersect or it could not. Check via the neighboring points
                         var a1in = PointInPolygon(a1.ToPoint2d(), B);
@@ -488,7 +488,7 @@ namespace tmath.geometryutils
 
             for (int i = 0; i < polygon.Count; i++)
             {
-                if (CommonUtil.AlmostEqual(dotproduct[i], min))
+                if (CommonUtil.AlmostEqual(dotproduct[i], min, TOL))
                 {
                     double dot = polygon[i].X * normal.X + polygon[i].Y * normal.Y;
                     //TODO: disputed
@@ -498,7 +498,7 @@ namespace tmath.geometryutils
                         indexmin = i;
                     }
                 }
-                else if (CommonUtil.AlmostEqual(dotproduct[i], max))
+                else if (CommonUtil.AlmostEqual(dotproduct[i], max, TOL))
                 {
                     double dot = polygon[i].X * normal.X + polygon[i].Y * normal.Y;
                     if (dot > normalmax)
@@ -536,11 +536,11 @@ namespace tmath.geometryutils
             // -1 = left, 1 = right
             int scandirection = -1;
 
-            if (CommonUtil.AlmostEqual(dotleft, 0))
+            if (CommonUtil.AlmostEqual(dotleft, 0, TOL))
             {
                 scandirection = 1;
             }
-            else if (CommonUtil.AlmostEqual(dotright, 0))
+            else if (CommonUtil.AlmostEqual(dotright, 0, TOL))
             {
                 scandirection = -1;
             }
@@ -549,7 +549,7 @@ namespace tmath.geometryutils
                 double normaldotleft = 0;
                 double normaldotright = 0;
 
-                if (CommonUtil.AlmostEqual(dotleft, dotright))
+                if (CommonUtil.AlmostEqual(dotleft, dotright, TOL))
                 {
                     // the points line up exactly along the normal vector
                     normaldotleft = leftvector.X * normal.X + leftvector.Y * normal.Y;
@@ -635,16 +635,16 @@ namespace tmath.geometryutils
             double s2dotnorm = s2.X * normal.X + s2.Y * normal.Y;
 
             // point is exactly along the edge in the normal direction
-            if (CommonUtil.AlmostEqual(pdot, s1dot) && CommonUtil.AlmostEqual(pdot, s2dot))
+            if (CommonUtil.AlmostEqual(pdot, s1dot, TOL) && CommonUtil.AlmostEqual(pdot, s2dot, TOL))
             {
 
                 // point lies on an endpoint
-                if (CommonUtil.AlmostEqual(pdotnorm, s1dotnorm))
+                if (CommonUtil.AlmostEqual(pdotnorm, s1dotnorm, TOL))
                 {
                     return double.NaN;
                 }
 
-                if (CommonUtil.AlmostEqual(pdotnorm, s2dotnorm))
+                if (CommonUtil.AlmostEqual(pdotnorm, s2dotnorm, TOL))
                 {
                     return double.NaN;
                 }
@@ -672,12 +672,12 @@ namespace tmath.geometryutils
                 }
             }
             // point
-            else if (CommonUtil.AlmostEqual(pdot, s1dot))
+            else if (CommonUtil.AlmostEqual(pdot, s1dot, TOL))
             {
                 if (s1inclusive) return pdotnorm - s1dotnorm;
                 else return double.NaN;
             }
-            else if (CommonUtil.AlmostEqual(pdot, s2dot))
+            else if (CommonUtil.AlmostEqual(pdot, s2dot, TOL))
             {
                 if (s2inclusive) return pdotnorm - s2dotnorm;
                 else return double.NaN;
@@ -713,15 +713,15 @@ namespace tmath.geometryutils
 
             if (!infinite)
             {
-                if (((pdot < s1dot || CommonUtil.AlmostEqual(pdot, s1dot)) && (pdot < s2dot || CommonUtil.AlmostEqual(pdot, s2dot))) || ((pdot > s1dot || CommonUtil.AlmostEqual(pdot, s1dot)) && (pdot > s2dot || CommonUtil.AlmostEqual(pdot, s2dot))))
+                if (((pdot < s1dot || CommonUtil.AlmostEqual(pdot, s1dot, TOL)) && (pdot < s2dot || CommonUtil.AlmostEqual(pdot, s2dot, TOL))) || ((pdot > s1dot || CommonUtil.AlmostEqual(pdot, s1dot, TOL)) && (pdot > s2dot || CommonUtil.AlmostEqual(pdot, s2dot, TOL))))
                 {
                     return double.NaN; // dot doesn't collide with segment, or lies directly on the vertex
                 }
-                if ((CommonUtil.AlmostEqual(pdot, s1dot) && CommonUtil.AlmostEqual(pdot, s2dot)) && (pdotnorm > s1dotnorm && pdotnorm > s2dotnorm))
+                if ((CommonUtil.AlmostEqual(pdot, s1dot, TOL) && CommonUtil.AlmostEqual(pdot, s2dot, TOL)) && (pdotnorm > s1dotnorm && pdotnorm > s2dotnorm))
                 {
                     return Math.Min(pdotnorm - s1dotnorm, pdotnorm - s2dotnorm);
                 }
-                if ((CommonUtil.AlmostEqual(pdot, s1dot) && CommonUtil.AlmostEqual(pdot, s2dot)) && (pdotnorm < s1dotnorm && pdotnorm < s2dotnorm))
+                if ((CommonUtil.AlmostEqual(pdot, s1dot, TOL) && CommonUtil.AlmostEqual(pdot, s2dot, TOL)) && (pdotnorm < s1dotnorm && pdotnorm < s2dotnorm))
                 {
                     return -Math.Min(s1dotnorm - pdotnorm, s2dotnorm - pdotnorm);
                 }
@@ -732,7 +732,7 @@ namespace tmath.geometryutils
 
         public static double SegmentDistance(NFPPoint A, NFPPoint B, NFPPoint E, NFPPoint F, NFPVector direction)
         {
-            NFPVector normal = new NFPVector(direction.Y, -direction.X);
+            NFPVector normal = new NFPVector(direction.Y, -direction.X); // ccw - 外法向
             NFPVector reverse = new NFPVector(-direction.X, -direction.Y);
 
             double dotA = A.Dot(normal); // A.X * normal.X + A.Y * normal.Y;
@@ -789,7 +789,7 @@ namespace tmath.geometryutils
             var crossABF = (F.Y - A.Y) * (B.X - A.X) - (F.X - A.X) * (B.Y - A.Y);
 
             // lines are colinear
-            if (CommonUtil.AlmostEqual(crossABE, 0) && CommonUtil.AlmostEqual(crossABF, 0))
+            if (CommonUtil.AlmostEqual(crossABE, 0, TOL) && CommonUtil.AlmostEqual(crossABF, 0, TOL))
             {
 
                 NFPVector ABnorm = new NFPVector(B.Y - A.Y, A.X - B.X);
@@ -819,22 +819,22 @@ namespace tmath.geometryutils
             List<double> distances = new List<double>();
 
             // coincident points
-            if (CommonUtil.AlmostEqual(dotA, dotE))
+            if (CommonUtil.AlmostEqual(dotA, dotE, TOL))
             {
                 distances.Add(crossA - crossE);
             }
-            else if (CommonUtil.AlmostEqual(dotA, dotF))
+            else if (CommonUtil.AlmostEqual(dotA, dotF, TOL))
             {
                 distances.Add(crossA - crossF);
             }
             else if (dotA > EFmin && dotA < EFmax)
             {
                 double d = PointDistance(A, E, F, reverse);
-                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0))
+                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0, TOL))
                 {
                     //  A currently touches EF, but AB is moving away from EF
                     var dB = PointDistance(B, E, F, reverse, true);
-                    if (dB < 0 || CommonUtil.AlmostEqual((double)dB * overlap, 0))
+                    if (dB < 0 || CommonUtil.AlmostEqual((double)dB * overlap, 0, TOL))
                     {
                         d = double.NaN;
                     }
@@ -846,11 +846,11 @@ namespace tmath.geometryutils
             }
 
 
-            if (CommonUtil.AlmostEqual(dotB, dotE))
+            if (CommonUtil.AlmostEqual(dotB, dotE, TOL))
             {
                 distances.Add(crossB - crossE);
             }
-            else if (CommonUtil.AlmostEqual(dotB, dotF))
+            else if (CommonUtil.AlmostEqual(dotB, dotF, TOL))
             {
                 distances.Add(crossB - crossF);
             }
@@ -858,11 +858,11 @@ namespace tmath.geometryutils
             {
                 var d = PointDistance(B, E, F, reverse);
 
-                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0))
+                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0, TOL))
                 {
                     // crossA>crossB A currently touches EF, but AB is moving away from EF
                     var dA = PointDistance(A, E, F, reverse, true);
-                    if (dA < 0 || CommonUtil.AlmostEqual((double)dA * overlap, 0))
+                    if (dA < 0 || CommonUtil.AlmostEqual((double)dA * overlap, 0, TOL))
                         d = double.NaN;
                 }
                 if (!double.IsNaN(d))
@@ -874,11 +874,11 @@ namespace tmath.geometryutils
             if (dotE > ABmin && dotE < ABmax)
             {
                 var d = PointDistance(E, A, B, direction);
-                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0))
+                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0, TOL))
                 {
                     // crossF < crossE A currently touches EF, but AB is moving away from EF
                     var dF = PointDistance(F, A, B, direction, true);
-                    if (dF < 0 || CommonUtil.AlmostEqual((double)dF * overlap, 0))
+                    if (dF < 0 || CommonUtil.AlmostEqual((double)dF * overlap, 0, TOL))
                     {
                         d = double.NaN;
                     }
@@ -892,10 +892,10 @@ namespace tmath.geometryutils
             if (dotF > ABmin && dotF < ABmax)
             {
                 var d = PointDistance(F, A, B, direction);
-                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0))
+                if (!double.IsNaN(d) && CommonUtil.AlmostEqual((double)d, 0, TOL))
                 { // && crossE<crossF A currently touches EF, but AB is moving away from EF
                     var dE = PointDistance(E, A, B, direction, true);
-                    if (dE < 0 || CommonUtil.AlmostEqual((double)dE * overlap, 0))
+                    if (dE < 0 || CommonUtil.AlmostEqual((double)dE * overlap, 0, TOL))
                     {
                         d = double.NaN;
                     }
@@ -967,7 +967,7 @@ namespace tmath.geometryutils
                     NFPPoint B1 = new NFPPoint(edgeB[i].X + Boffsetx, edgeB[i].Y + Boffsety);
                     NFPPoint B2 = new NFPPoint(edgeB[i + 1].X + Boffsetx, edgeB[i + 1].Y + Boffsety);
 
-                    if ((CommonUtil.AlmostEqual(A1.X, A2.X) && CommonUtil.AlmostEqual(A1.Y, A2.Y)) || (CommonUtil.AlmostEqual(B1.X, B2.X) && CommonUtil.AlmostEqual(B1.Y, B2.Y)))
+                    if ((CommonUtil.AlmostEqual(A1.X, A2.X, TOL) && CommonUtil.AlmostEqual(A1.Y, A2.Y, TOL)) || (CommonUtil.AlmostEqual(B1.X, B2.X, TOL) && CommonUtil.AlmostEqual(B1.Y, B2.Y, TOL)))
                     {
                         continue; // ignore extremely small lines
                     }
@@ -975,7 +975,7 @@ namespace tmath.geometryutils
                     double d = SegmentDistance(A1, A2, B1, B2, dir);
                     if (!double.IsNaN(d) && (double.IsNaN(distance) || d < distance))
                     {
-                        if (!ignoreNegative || d > 0 || CommonUtil.AlmostEqual((double)d, 0))
+                        if (!ignoreNegative || d > 0 || CommonUtil.AlmostEqual((double)d, 0, TOL))
                         {
                             distance = d;
                         }
@@ -1132,7 +1132,7 @@ namespace tmath.geometryutils
 
                         // only slide until no longer negative
                         // TODO: clean this up
-                        if (!double.IsNaN(d) && !CommonUtil.AlmostEqual((double)d, 0) && d > 0)
+                        if (!double.IsNaN(d) && !CommonUtil.AlmostEqual((double)d, 0, TOL) && d > 0)
                         {
 
                         }
@@ -1143,7 +1143,7 @@ namespace tmath.geometryutils
 
                         var vd2 = vx * vx + vy * vy;
 
-                        if (d * d < vd2 && !CommonUtil.AlmostEqual((double)d * (double)d, vd2))
+                        if (d * d < vd2 && !CommonUtil.AlmostEqual((double)d * (double)d, vd2, TOL))
                         {
                             var vd = Math.Sqrt(vx * vx + vy * vy);
                             vx *= (double)d / vd;
@@ -1184,7 +1184,7 @@ namespace tmath.geometryutils
                 {
                     return false;
                 }
-                if (!CommonUtil.AlmostEqual(poly[i].Y, bb.Y) && !CommonUtil.AlmostEqual(poly[i].Y, bb.Y + bb.Height))
+                if (!CommonUtil.AlmostEqual(poly[i].Y, bb.Y, TOL) && !CommonUtil.AlmostEqual(poly[i].Y, bb.Y + bb.Height, TOL))
                 {
                     return false;
                 }
@@ -1353,7 +1353,7 @@ namespace tmath.geometryutils
                         for (int j = 0; j < B.Count; j++)
                         {
                             var nextj = (j == B.Count - 1) ? 0 : j + 1;
-                            if (CommonUtil.AlmostEqual(A[i].X, B[j].X + B.offsetx) && CommonUtil.AlmostEqual(A[i].Y, B[j].Y + B.offsety))
+                            if (CommonUtil.AlmostEqual(A[i].X, B[j].X + B.offsetx, TOL) && CommonUtil.AlmostEqual(A[i].Y, B[j].Y + B.offsety))
                                 touching.Add(new TouchType(0, i, j));
                             else if (CommonUtil.OnSegment(A[i].ToPoint2d(), A[nexti].ToPoint2d(), new TPoint2D(B[j].X + B.offsetx, B[j].Y + B.offsety)))
                             {
@@ -1457,7 +1457,7 @@ namespace tmath.geometryutils
 
                     for (int i = 0; i < vectors.Count; i++)
                     {
-                        if (CommonUtil.AlmostEqual(vectors[i].Length(), 0)) continue;
+                        if (CommonUtil.AlmostEqual(vectors[i].Length(), 0, TOL)) continue;
 
                         // if this vector points us back to where we came from, ignore it 
                         // ie cross product = 0, dot product < 0
@@ -1488,7 +1488,7 @@ namespace tmath.geometryutils
 
                     }
 
-                    if (translate is null || CommonUtil.AlmostEqual(maxd, 0))
+                    if (translate is null || CommonUtil.AlmostEqual(maxd, 0, TOL))
                     {
                         //NFP.Clear();
                         // throw new DataMisalignedException("didn't close the loop, something went wrong here");
@@ -1502,7 +1502,7 @@ namespace tmath.geometryutils
 
                     #region trim
                     double vlength2 = translate.X * translate.X + translate.Y * translate.Y;
-                    if (maxd * maxd < vlength2 && !CommonUtil.AlmostEqual(maxd * maxd, vlength2))
+                    if (maxd * maxd < vlength2 && !CommonUtil.AlmostEqual(maxd * maxd, vlength2, TOL))
                     {
                         double scale = Math.Sqrt((maxd * maxd) / vlength2);
                         translate.X *= scale;
@@ -1511,7 +1511,7 @@ namespace tmath.geometryutils
                     referencex += translate.X;
                     referencey += translate.Y;
 
-                    if (CommonUtil.AlmostEqual(referencex, startx) && CommonUtil.AlmostEqual(referencey, starty))
+                    if (CommonUtil.AlmostEqual(referencex, startx, TOL) && CommonUtil.AlmostEqual(referencey, starty, TOL))
                     {
                         // we've made a full loop
                         break;
@@ -1524,7 +1524,7 @@ namespace tmath.geometryutils
                     {
                         for (int j = 0; j < NFP.Count - 1; j++)
                         {
-                            if (CommonUtil.AlmostEqual(referencex, NFP[j].X) && CommonUtil.AlmostEqual(referencey, NFP[j].Y)) looped = true;
+                            if (CommonUtil.AlmostEqual(referencex, NFP[j].X, TOL) && CommonUtil.AlmostEqual(referencey, NFP[j].Y, TOL)) looped = true;
                         }
                     }
                     #endregion
@@ -1627,7 +1627,7 @@ namespace tmath.geometryutils
                 for (int j = 0; j < B.Count; j++)
                 {
                     int nextj = (j == B.Count - 1) ? 0 : j + 1;
-                    if (CommonUtil.AlmostEqual(A[current].X + Aoffsetx, B[j].X + Boffsetx) && CommonUtil.AlmostEqual(A[current].Y + Aoffsety, B[j].Y + Boffsety))
+                    if (CommonUtil.AlmostEqual(A[current].X + Aoffsetx, B[j].X + Boffsetx, TOL) && CommonUtil.AlmostEqual(A[current].Y + Aoffsety, B[j].Y + Boffsety, TOL))
                     {
                         C.Add(new NFPPoint(A[current].X + Aoffsetx, A[current].Y + Aoffsety));
                         intercept1 = j;
@@ -1666,7 +1666,7 @@ namespace tmath.geometryutils
                 for (int j = 0; j < B.Count; j++)
                 {
                     var nextj = (j == B.Count - 1) ? 0 : j + 1;
-                    if (CommonUtil.AlmostEqual(A[current].X + Aoffsetx, B[j].X + Boffsetx) && CommonUtil.AlmostEqual(A[current].Y, B[j].Y + Boffsety))
+                    if (CommonUtil.AlmostEqual(A[current].X + Aoffsetx, B[j].X + Boffsetx, TOL) && CommonUtil.AlmostEqual(A[current].Y, B[j].Y + Boffsety, TOL))
                     {
                         C.Insert(0, new NFPPoint(A[current].X + Aoffsetx, A[current].Y + Aoffsety));
                         intercept2 = j;
@@ -1725,7 +1725,7 @@ namespace tmath.geometryutils
             for (int i = 0; i < C.Count; i++)
             {
                 var next = (i == C.Count - 1) ? 0 : i + 1;
-                if (CommonUtil.AlmostEqual(C[i].X, C[next].X) && CommonUtil.AlmostEqual(C[i].Y, C[next].Y))
+                if (CommonUtil.AlmostEqual(C[i].X, C[next].X, TOL) && CommonUtil.AlmostEqual(C[i].Y, C[next].Y, TOL))
                 {
                     C.RemoveAt(i);
                     i--;
@@ -1753,7 +1753,7 @@ namespace tmath.geometryutils
             {
                 for (var j = 0; j < nfp_list[i].Count; j++)
                 {
-                    if (CommonUtil.AlmostEqual(p.X, nfp_list[i][j].X) && CommonUtil.AlmostEqual(p.Y, nfp_list[i][j].Y))
+                    if (CommonUtil.AlmostEqual(p.X, nfp_list[i][j].X, TOL) && CommonUtil.AlmostEqual(p.Y, nfp_list[i][j].Y, TOL))
                     {
                         return true;
                     }
