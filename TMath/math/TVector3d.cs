@@ -165,6 +165,17 @@ namespace tmath
             double l = Length(); X /= l; Y /= l; Z /= l;
         }
 
+        public void SetLength(double D)
+        {
+            Normalize();
+            double unity = (X * X + Y * Y + Z * Z);
+            if (unity == 0) throw new DivideByZeroException("This vector is zero");
+            double d = Math.Sqrt(D * D / unity);
+            X *= d;
+            Y *= d;
+            Z *= d;
+        }
+
         public TVector3D FromArray(double[] array, int offset = 0)
         {
             X = array[offset];

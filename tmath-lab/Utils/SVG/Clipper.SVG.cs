@@ -6,14 +6,11 @@
 * License   :  http://www.boost.org/LICENSE_1_0.txt                            *
 *******************************************************************************/
 
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 
 namespace Clipper2Lib
 {
-  public class SvgWriter
+    public class SvgWriter
   {
     public const uint black = 0xFF000000;
     public const uint white = 0xFFFFFFFF;

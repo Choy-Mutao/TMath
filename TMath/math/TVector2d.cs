@@ -121,6 +121,16 @@ namespace tmath
             double l = Length(); X /= l; Y /= l;
         }
 
+        public void SetLength(double D)
+        {
+            Normalize();
+            double unity = (X * X + Y * Y);
+            if (unity == 0) throw new DivideByZeroException("This vector is zero");
+            double d = Math.Sqrt(D * D / unity);
+            X *= d;
+            Y *= d;
+        }
+
         public TVector2D GetNormal()
         {
             TVector2D normal = new TVector2D(X, Y);

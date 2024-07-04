@@ -118,35 +118,15 @@ namespace tmath.geometryutils
         public TreeNode() : base()
         { }
 
-        public TreeNode(int capacity) : base(capacity) { }
-
-        public TreeNode(List<T> values) : base(values) { }
-
         public TreeNode(TreeNode<T> values) : base(values)
         {
-            source = values.source;
-            id = values.id;
-            rotation = values.rotation;
-            marked = values.marked;
             offsetx = values.offsetx;
             offsety = values.offsety;
         }
 
-        public int source { get; set; } = -1;
-        public int id { get; set; } = -1;
-        public List<TreeNode<T>> children { get; set; }
-        public TreeNode<T> parent { get; set; }
-        public double rotation { get; set; } = 0;
-        public bool marked { get; set; } = false;
         public double offsetx { get; set; } = 0;
         public double offsety { get; set; } = 0;
 
-        public List<T> ToList()
-        {
-            List<T> list = new List<T>();
-            this.ForEach(item => list.Add(item));
-            return list;
-        }
     }
 
     public class NFP_Key

@@ -8,6 +8,7 @@ namespace tmath
         double Length();
         double LengthSq();
         void Normalize();
+        void SetLength(double D);
         double Dot(V v);
         bool IsEqualTo(V p, Tolerance tol);
         bool IsEqualTo(V p, double tol = 1e-3);
