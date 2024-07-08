@@ -126,9 +126,12 @@ namespace tmath
             Normalize();
             double unity = (X * X + Y * Y);
             if (unity == 0) throw new DivideByZeroException("This vector is zero");
+
+            int sign = Math.Sign(D);
+
             double d = Math.Sqrt(D * D / unity);
-            X *= d;
-            Y *= d;
+            X *= d * sign;
+            Y *= d * sign;
         }
 
         public TVector2D GetNormal()

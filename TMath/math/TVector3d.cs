@@ -170,10 +170,13 @@ namespace tmath
             Normalize();
             double unity = (X * X + Y * Y + Z * Z);
             if (unity == 0) throw new DivideByZeroException("This vector is zero");
+
+            int sign = Math.Sign(D);
+
             double d = Math.Sqrt(D * D / unity);
-            X *= d;
-            Y *= d;
-            Z *= d;
+            X *= d * sign;
+            Y *= d * sign;
+            Z *= d * sign;
         }
 
         public TVector3D FromArray(double[] array, int offset = 0)
