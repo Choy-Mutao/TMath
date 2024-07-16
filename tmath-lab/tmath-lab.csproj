@@ -11,6 +11,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\zhangchaoyi\.nuget\packages\microsoft.testplatform.testhost\17.1.0\build\netcoreapp2.1\x64\Microsoft.TestPlatform.PlatformAbstractions.dll" />
+    <Content Remove="C:\Users\zhangchaoyi\.nuget\packages\microsoft.testplatform.testhost\17.1.0\build\netcoreapp2.1\x64\testhost.dll" />
+    <Content Remove="C:\Users\zhangchaoyi\.nuget\packages\microsoft.testplatform.testhost\17.1.0\build\netcoreapp2.1\x64\testhost.exe" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="math\TPointCollection_Lab.cs~RF1f842d.TMP" />
   </ItemGroup>
 
@@ -29,6 +35,70 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TMath\tmath.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\\Microsoft.TestPlatform.AdapterUtilities.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\\Microsoft.TestPlatform.AdapterUtilities.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\\Microsoft.TestPlatform.AdapterUtilities.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\\Microsoft.TestPlatform.AdapterUtilities.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\..\_common\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="C:\Users\zhangchaoyi\.nuget\packages\mstest.testadapter\2.2.10\build\net5.0\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll" />
   </ItemGroup>
 
 </Project>

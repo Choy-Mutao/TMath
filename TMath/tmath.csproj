@@ -45,29 +45,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="algorithms\GAPSO\ExceptionHelper.cs" />
-    <Compile Include="algorithms\GAPSO\Fitness\IFitness.cs" />
-    <Compile Include="algorithms\GAPSO\Gearbox\SPSO2006Gearbox.cs" />
-    <Compile Include="algorithms\GAPSO\InformTopology\IInformTopology.cs" />
-    <Compile Include="algorithms\GAPSO\InformTopology\LinksInformTopology.cs" />
-    <Compile Include="algorithms\GAPSO\Randomization\BaseRandomization.cs" />
-    <Compile Include="algorithms\GAPSO\Randomization\IRandomization.cs" />
-    <Compile Include="algorithms\GAPSO\Randomization\KISSRandomization.cs" />
-    <Compile Include="algorithms\GAPSO\StringExtensions.cs" />
-    <Compile Include="algorithms\GAPSO\Swarm\ISwarm.cs" />
-    <Compile Include="algorithms\GAPSO\Particle\IParticle.cs" />
-    <Compile Include="algorithms\GAPSO\ParticleSwarmAlgorithm.cs" />
-    <Compile Include="algorithms\GAPSO\Swarm\MultipleObjectiveSwarm.cs" />
-    <Compile Include="algorithms\GAPSO\Swarm\SingleObjectiveSwarm.cs" />
-    <Compile Include="algorithms\GAPSO\Termination\ExecuteLimtTermination.cs" />
-    <Compile Include="algorithms\GAPSO\Termination\FailureTermination.cs" />
-    <Compile Include="algorithms\GAPSO\Termination\FitnessTermination.cs" />
-    <Compile Include="algorithms\GAPSO\Termination\ITermination.cs" />
-    <Compile Include="algorithms\GAPSO\Gearbox\IGearbox.cs" />
-    <Compile Include="algorithms\sweepline\EventQueue.cs" />
-    <Compile Include="algorithms\sweepline\SL_Seg.cs" />
-    <Compile Include="algorithms\sweepline\SweepEvent.cs" />
-    <Compile Include="algorithms\sweepline\SweepLine.cs" />
     <Compile Include="ClipperUtil.cs" />
     <Compile Include="earcut\Earcut.cs" />
     <Compile Include="geometryutils\Geometry2dUtils.cs" />
