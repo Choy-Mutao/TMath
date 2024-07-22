@@ -2,7 +2,7 @@
 
 namespace tmath.geo_math.curve
 {
-    public abstract class Circle<T, V> where T : IPoint<T, V> where V : IVector<V>
+    public abstract class Circle<T, V> : TCurve where T : IPoint<T, V> where V : IVector<V>
     {
         public T Center;
         public double Radius;
@@ -27,6 +27,11 @@ namespace tmath.geo_math.curve
             return result;
         }
 
+        public override bool Equals(TCurve other)
+        {
+            throw new NotImplementedException();
+        }
+
         public TPoint2D GetPointAtTheta(double radian_angle)
         {
             double x = Center.X + Radius * Math.Cos(radian_angle);
@@ -42,6 +47,11 @@ namespace tmath.geo_math.curve
         public override TPointCollection<TPoint3D, TVector3D> Discretize(int number_of_pnts)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override bool Equals(TCurve other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

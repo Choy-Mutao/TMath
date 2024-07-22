@@ -13,15 +13,15 @@ namespace tmath_lab.Geo_Lab
         {
             SvgWriter svg = new SvgWriter();
 
-            TArc2D arc2d = new TArc2D(new TPoint2D(11, 11), 100.0, (260.0 / 180.0 * Math.PI), (50.0 / 180.0 * Math.PI), ARC_DIR.CCW);
-            TPoint2DCollection dis = (TPoint2DCollection)arc2d.Discretize(64);
+            TArc2D arc2d = new TArc2D(new TPoint2D(0, 0), 10.0, (260.0 / 180.0 * Math.PI), (50.0 / 180.0 * Math.PI), ARC_DIR.CCW);
+            TPoint2DCollection dis = (TPoint2DCollection)arc2d.Discretize();
             dis.Insert(0, arc2d.Center);
             dis.Add(arc2d.Center);
 
             SvgUtils.AddSubject(svg, ClipperUtil.TPoint2DCollectionToClipperPathD(dis));
 
-            TArc2D arc2d2 = new TArc2D(new TPoint2D(0, 0), 100.0, (260.0 / 180.0 * Math.PI), Math.PI * 2.0 - (50.0 / 180.0 * Math.PI), ARC_DIR.CW);
-            TPoint2DCollection dis2 = (TPoint2DCollection)arc2d2.Discretize(64);
+            TArc2D arc2d2 = new TArc2D(new TPoint2D(0, 0), 10.0, (260.0 / 180.0 * Math.PI), Math.PI * 2.0 - (50.0 / 180.0 * Math.PI), ARC_DIR.CW);
+            TPoint2DCollection dis2 = (TPoint2DCollection)arc2d2.Discretize();
             dis2.Insert(0, arc2d2.Center);
             dis2.Add(arc2d2.Center);
             SvgUtils.AddSubject(svg, ClipperUtil.TPoint2DCollectionToClipperPathD(dis2));

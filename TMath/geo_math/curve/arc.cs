@@ -74,12 +74,20 @@ namespace tmath.geo_math.curve
             dir = _dir;
         }
 
-        public override TPointCollection<TPoint2D, TVector2D> Discretize(int number_of_pnts)
+        public override TPointCollection<TPoint2D, TVector2D> Discretize(int number_of_pnts = -1)
         {
+            if (Radius <= 0) throw new ArgumentException("Arc radius can not be zero");
+
             TPoint2DCollection result = new TPoint2DCollection();
-
-            double diff = center_radian / number_of_pnts;
-
+            double diff = 1;
+            if (number_of_pnts < 0) // 采用动态采样;
+            {
+                //diff = Math.Acos(1 - 1 * (center_radian*0.5 / Math.PI) / Radius);
+                //number_of_pnts = (int)Math.Floor(center_radian / diff);
+                number_of_pnts = 64;
+            }
+            else
+                diff = center_radian / number_of_pnts;
             for (int i = 0; i <= number_of_pnts; i++)
             {
                 double angle = start_radian + diff * i * (int)dir;
@@ -337,6 +345,11 @@ namespace tmath.geo_math.curve
             }
             return i;
         }
+
+        public override bool Equals(TCurve other)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class TArc3D : Arc<TPoint3D, TVector3D>
@@ -348,6 +361,11 @@ namespace tmath.geo_math.curve
         public override TPointCollection<TPoint3D, TVector3D> Discretize(int number_of_pnts)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override bool Equals(TCurve other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

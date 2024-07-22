@@ -1,6 +1,5 @@
 ﻿using tmath;
 using tmath.geo_math;
-using tmath.geometry;
 
 namespace tmath_lab.Geo_Lab
 {
