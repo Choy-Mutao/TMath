@@ -1,6 +1,7 @@
 ﻿using Clipper2Lib;
 using tmath;
-using tmath.geometry;
+using tmath.geo_math;
+using tmath.geo_math.curve;
 using tmath.pga;
 
 namespace tmath_lab.math

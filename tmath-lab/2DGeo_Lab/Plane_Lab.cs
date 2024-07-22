@@ -1,4 +1,7 @@
 ﻿using tmath;
+using tmath.geo_math;
+using tmath.geo_math.curve;
+using tmath.geo_math.face;
 using tmath.geometry;
 
 namespace tmath_lab.Geo_Lab

@@ -1,4 +1,5 @@
 ﻿using System;
+using tmath.geo_math.curve;
 using tmath.geometry;
 
 namespace tmath.pga

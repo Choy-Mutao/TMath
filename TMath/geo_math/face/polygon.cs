@@ -1,4 +1,6 @@
-﻿namespace tmath.geometry
+﻿using tmath.geo_math.curve;
+
+namespace tmath.geo_math.face
 {
     // 多边形, 首尾相连
     public abstract class APolygon<S> where S : ISegment

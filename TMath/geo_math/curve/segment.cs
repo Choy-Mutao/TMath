@@ -1,6 +1,8 @@
 ﻿using System;
+using tmath.geo_math.face;
+using tmath.geometry;
 
-namespace tmath.geometry
+namespace tmath.geo_math.curve
 {
     public interface ISegment { }
     // 线段

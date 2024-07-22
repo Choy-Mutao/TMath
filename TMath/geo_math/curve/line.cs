@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using tmath.geo_math.curve;
 
-namespace tmath.geometry
+namespace tmath.geo_math.curve
 {
     // 直线 无向 无限
     public abstract class Line<T, V> where T : IPoint<T, V> where V : IVector<V>

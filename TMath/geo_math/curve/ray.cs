@@ -1,7 +1,8 @@
 ﻿
 using System;
+using tmath.geo_math.face;
 
-namespace tmath.geometry
+namespace tmath.geo_math.curve
 {
     // 射线
     public abstract class TRay<P, V> where P : IPoint<P, V> where V : IVector<V>

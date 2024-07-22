@@ -1,5 +1,6 @@
 ﻿using System;
-using tmath.geometry;
+using tmath.geo_math.curve;
+using tmath.geo_math.face;
 
 namespace tmath.pga
 {

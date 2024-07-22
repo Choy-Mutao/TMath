@@ -1,6 +1,7 @@
 ﻿
 
 using tmath;
+using tmath.geo_math.curve;
 using tmath.geometry;
 
 namespace tmath_lab.Geo_Lab

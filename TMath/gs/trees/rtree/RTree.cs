@@ -23,9 +23,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading;
 using tmath;
-using tmath.geometry;
+using tmath.geo_math.curve;
 
 namespace RTree
 {

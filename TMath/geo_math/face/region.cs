@@ -1,8 +1,9 @@
 ﻿using Clipper2Lib;
 using System;
 using System.Collections.Generic;
+using tmath.geo_math.curve;
 
-namespace tmath.geometry
+namespace tmath.geo_math.face
 {
     public abstract class TPath<T, V> where T : IPoint<T, V> where V : IVector<V>
     {

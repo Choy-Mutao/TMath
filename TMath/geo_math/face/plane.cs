@@ -1,9 +1,10 @@
 ﻿using System;
+using tmath.geo_math.curve;
 
 /// <summary>
 /// 不特意定义二维平面
 /// </summary>
-namespace tmath.geometry
+namespace tmath.geo_math.face
 {
     /// <summary>
     /// 不特意定义二维平面

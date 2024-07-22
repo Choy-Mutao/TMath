@@ -1,5 +1,4 @@
 ﻿using System;
-using tmath.geometry;
 
 namespace tmath.geo_math.curve
 {

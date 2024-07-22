@@ -1,4 +1,6 @@
 ﻿using tmath;
+using tmath.geo_math;
+using tmath.geo_math.curve;
 using tmath.geometry;
 
 

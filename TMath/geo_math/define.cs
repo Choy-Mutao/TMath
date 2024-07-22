@@ -1,5 +1,5 @@
 ﻿
-namespace tmath.geometry
+namespace tmath.geo_math
 {
     // Error codes
     public enum TError

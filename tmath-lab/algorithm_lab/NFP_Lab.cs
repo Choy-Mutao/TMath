@@ -1,6 +1,7 @@
 ﻿using Clipper2Lib;
 using System.Text.RegularExpressions;
 using tmath;
+using tmath.geo_math.curve;
 using tmath.geometryutils;
 
 namespace tmath_lab.algorithm_lab
@@ -89,6 +90,52 @@ namespace tmath_lab.algorithm_lab
 
 
             string filename = @"..\..\..\Test_NoFitPolygon.svg";
+            SvgUtils.SaveToFile(svg, filename, FillRule.NonZero, 800, 600, 10);
+            ClipperFileIO.OpenFileWithDefaultApp(filename);
+            Assert.IsTrue(true);
+        }
+
+
+
+        [TestMethod]
+        public void Test_Circl_NoFitPolygon()
+        {
+            TPoint2DCollection Mbound, loudongpointsR;
+            ReadText(out Mbound, out loudongpointsR);
+            //Circle A
+            //TCircle2D _A = new TCircle2D(new TPoint2D(0, 0), 10);
+            //Circle B
+            //TCircle2D _B = new TCircle2D(new TPoint2D(0, 0), 2);
+
+            //Mbound = _A.Discretize(64)! as TPoint2DCollection;
+            //loudongpointsR = _B.Discretize(64)! as TPoint2DCollection;
+
+
+
+            SvgWriter svg = new SvgWriter();
+            SvgUtils.AddSubject(svg, ClipperUtil.TPoint2DCollectionToClipperPathD(Mbound));
+            SvgUtils.AddSubject(svg, ClipperUtil.TPoint2DCollectionToClipperPathD(loudongpointsR));
+
+            if (Mbound.IsClockwise()) Mbound.Reverse();
+            if (loudongpointsR.IsClockwise()) loudongpointsR.Reverse();
+
+            TreeNode<NFPPoint> A = new TreeNode<NFPPoint>();
+            Mbound.ForEach(item => A.Add(new NFPPoint(item)));
+            TreeNode<NFPPoint> B = new TreeNode<NFPPoint>();
+            loudongpointsR.ForEach(item => B.Add(new NFPPoint(item)));
+
+
+            var result = NFPUtil.NoFitPolygon(A, B, false, false, 1e-9);
+
+            foreach (var nfp in result)
+            {
+                TPoint2DCollection solution = new TPoint2DCollection();
+                nfp.ForEach(item => solution.Add(item.ToPoint2d()));
+                SvgUtils.AddSolution(svg, new PathsD() { ClipperUtil.TPoint2DCollectionToClipperPathD(solution) }, false);
+            }
+
+
+            string filename = @"..\..\..\Test_Circl_NoFitPolygon.svg";
             SvgUtils.SaveToFile(svg, filename, FillRule.NonZero, 800, 600, 10);
             ClipperFileIO.OpenFileWithDefaultApp(filename);
             Assert.IsTrue(true);

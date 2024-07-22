@@ -1,4 +1,4 @@
-﻿namespace tmath.geometry
+﻿namespace tmath.geo_math.curve
 {
     // 折线, 首尾不相连
     public abstract class APolyline<S, T, V> : TPointCollection<T, V> where S : ISegment where T : IPoint<T, V> where V : IVector<V>

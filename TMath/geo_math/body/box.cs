@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace tmath.geometry
+namespace tmath.geo_math
 {
     [Serializable]
     public abstract class TBox<T>

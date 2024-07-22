@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace tmath.geometry
+namespace tmath.geo_math
 {
     public class GeometryException : Exception
     {
