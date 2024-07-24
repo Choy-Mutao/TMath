@@ -38,6 +38,13 @@ namespace tmath.geo_math.curve
             double y = Center.Y + Radius * Math.Sin(radian_angle);
             return new TPoint2D(x, y);
         }
+
+        public void GetTangencyOnDir(TVector2D direcion, out TPoint2D t1, out TPoint2D t2)
+        {
+            var dir = direcion.GetNormal();
+            t1 = Center + Radius * new TVector2D(-dir.Y, dir.X);
+            t2 = Center + Radius * new TVector2D(dir.Y, -dir.X);
+        }
     }
 
     public class TCircle3D : Circle<TPoint3D, TVector3D>

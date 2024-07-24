@@ -18,8 +18,8 @@ namespace tmath.geo_math.curve
             set => m_startradian = (value + 2 * Math.PI) % (2 * Math.PI);
         }
 
-        public abstract TPoint2D StartPoint { get; }
-        public abstract TPoint2D EndPoint { get; }
+        public abstract T StartPoint { get; }
+        public abstract T EndPoint { get; }
 
         // radian to end
         public double center_radian;
@@ -72,6 +72,24 @@ namespace tmath.geo_math.curve
             start_radian = s_r;
             center_radian = c_r;
             dir = _dir;
+        }
+
+        public TArc2D(TPoint2D center, TPoint2D start_pnt, TPoint2D end_pnt, double bulge)
+        {
+            if (start_pnt.IsEqualTo(end_pnt) || bulge == 0) throw new ArgumentException("Error Arc parameters");
+            // calculate radius
+            var chord_dir = (end_pnt - start_pnt).ToVector().GetNormal();
+            var mid_normal = new TVector2D(chord_dir.Y, -chord_dir.X).GetNormal();
+            var mid_pnt = (start_pnt + end_pnt) / 2;
+            var center_mid_vec = (center - mid_pnt).ToVector();
+
+            Center = mid_pnt + mid_normal * (center_mid_vec.Dot(mid_normal));
+            Radius = Center.DistanceTo(start_pnt);
+            start_radian = (Math.Atan2(start_pnt.Y - Center.Y, start_pnt.X - Center.X) + 2 * Math.PI) % (2 *(Math.PI));
+
+            if (bulge > 0) dir = ARC_DIR.CCW;
+            else dir = ARC_DIR.CW;
+            center_radian = 4 * Math.Atan(Math.Abs(bulge));
         }
 
         public override TPointCollection<TPoint2D, TVector2D> Discretize(int number_of_pnts = -1)
@@ -354,9 +372,9 @@ namespace tmath.geo_math.curve
 
     public class TArc3D : Arc<TPoint3D, TVector3D>
     {
-        public override TPoint2D StartPoint => throw new NotImplementedException();
+        public override TPoint3D StartPoint => throw new NotImplementedException();
 
-        public override TPoint2D EndPoint => throw new NotImplementedException();
+        public override TPoint3D EndPoint => throw new NotImplementedException();
 
         public override TPointCollection<TPoint3D, TVector3D> Discretize(int number_of_pnts)
         {
