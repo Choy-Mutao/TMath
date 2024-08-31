@@ -254,8 +254,21 @@ namespace tmath
             });
         }
 
-        [Obsolete("warning:, 该计算结果和坐标系设置强相关, 有更快的计算方法")]
-        public bool IsClockwise() { return Area() < 0; }
+        public bool IsClockwise()
+        {
+            // 
+            double sum = 0;
+            if (Count < 3) throw new ArgumentException("Points number less than 3");
+            MakeClosed();
+            for (int i = 0; i <  Count; i++)
+            {
+                var o = this[i];
+                var a = this[(i + 1) % Count];
+                var b = this[(i + 2) % Count];
+                sum += (a.X - o.X) * (b.Y - o.Y) - (a.Y - o.Y) * (b.X - o.X);
+            }
+            return sum < 0;
+        }
 
         /// <summary>
         /// 

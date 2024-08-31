@@ -53,9 +53,9 @@
     <Compile Include="geo_math\body\box.cs" />
     <Compile Include="geo_math\bounding\Ball.cs" />
     <Compile Include="geo_math\curve\arc.cs" />
-    <Compile Include="geo_math\curve\Circle.cs" />
+    <Compile Include="geo_math\curve\circle.cs" />
     <Compile Include="geo_math\curve\ellipse.cs" />
-    <Compile Include="geo_math\curve\TSpline.cs" />
+    <Compile Include="geo_math\curve\spline.cs" />
     <Compile Include="geo_math\define.cs" />
     <Compile Include="geo_math\GeometryException.cs" />
     <Compile Include="geo_math\GeometryOperator.cs" />

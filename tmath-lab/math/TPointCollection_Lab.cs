@@ -24,6 +24,33 @@ namespace tmath_lab.math
             Assert.IsFalse(new TPoint2DCollection().IsClosed());
         }
 
+        [TestMethod("判断点集是否Clockwise")]
+        public void Test_CollectionIsClockwise()
+        {
+            // 矩形逆时针
+            // (0,3) ------- (4, 3)
+            //   |              |
+            // (0,0) ------- (4, 0)
+            var ccw_rect = new TPoint2DCollection() { new TPoint2D(0, 0), new TPoint2D(4, 0), new TPoint2D(4, 3), new TPoint2D(0, 3) };
+            Assert.IsFalse(ccw_rect.IsClockwise(), "Passed");
+            // 矩形顺时针
+            var cw_rect = new TPoint2DCollection() { new TPoint2D(0, 0), new TPoint2D(0, 3), new TPoint2D(4, 3), new TPoint2D(4, 0) };
+            Assert.IsTrue(cw_rect.IsClockwise(), "Passed");
+            // 三角形顺时针
+            var cw_tran = new TPoint2DCollection() { new TPoint2D(1, 1), new TPoint2D(2, 5), new TPoint2D(5, 2) };
+            Assert.IsTrue(cw_tran.IsClockwise(), "Passed");
+            // 三角形逆时针
+            var ccw_tran = new TPoint2DCollection() { new TPoint2D(1, 1), new TPoint2D(5, 2), new TPoint2D(2, 5) };
+            Assert.IsFalse(ccw_tran.IsClockwise(), "Passed");
+            // 凹多边形
+            var non_simple_polygon = new TPoint2DCollection() { new TPoint2D(0, 0), new TPoint2D(4, 0), new TPoint2D(4, 3), new TPoint2D(2, 2), new TPoint2D(0, 3) };
+            Assert.IsFalse(non_simple_polygon.IsClockwise(), "Passed");
+            var cw_polygon = new TPoint2DCollection() { new TPoint2D(2, 2), new TPoint2D(3, 5), new TPoint2D(6, 5), new TPoint2D(7, 2), new TPoint2D(4, 1) };
+            Assert.IsTrue(cw_polygon.IsClockwise(), "Passed");
+            var ccw_polygon = new TPoint2DCollection() { new TPoint2D(2, 2), new TPoint2D(4, 1), new TPoint2D(7, 2), new TPoint2D(6, 5), new TPoint2D(3, 5) };
+            Assert.IsFalse(ccw_polygon.IsClockwise(), "Passed");
+        }
+
         [TestMethod("Test_CollectionRandom")]
         public void Test_CollectionRandom()
         {
